@@ -1,3 +1,4 @@
+package EjercicioAtleta;
 public class Atleta{
     private int numeroAtleta;
     private String nombreAtleta;

@@ -1,3 +1,4 @@
+package EjercicioPersona;
 public class Persona{
     private String nombre = "N N";
     private int edad;

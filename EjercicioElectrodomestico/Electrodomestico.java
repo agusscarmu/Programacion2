@@ -1,3 +1,4 @@
+package EjercicioElectrodomestico;
 public class Electrodomestico{
     private String nombre;
     private float precioBase=100;

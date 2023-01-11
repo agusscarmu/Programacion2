@@ -1,3 +1,4 @@
+package EjercicioHogwarts;
 import java.util.ArrayList;
 
 public class SombreroSeleccionador {

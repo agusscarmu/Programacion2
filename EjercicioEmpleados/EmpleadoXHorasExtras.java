@@ -1,3 +1,5 @@
+package EjercicioEmpleados;
+
 public class EmpleadoXHorasExtras extends EmpleadoContratado{
     private int horasExtras;
     private int valorHorasExtras; 

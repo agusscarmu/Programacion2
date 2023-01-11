@@ -1,3 +1,5 @@
+package EjercicioPuntoGeometrico;
+
 public class Rectangulo{
     private int verticeX1;
     private int verticeX2;
