@@ -1,3 +1,5 @@
+package EjercicioPuntoGeometrico;
+
 public class PuntoGeometrico{
     private int X;
     private int Y;

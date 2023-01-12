@@ -1,3 +1,5 @@
+package EjercicioEmpleados;
+
 public class EmpleadoXComision extends EmpleadoContratado{
     
     private int ventas;

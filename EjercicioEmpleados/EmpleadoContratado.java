@@ -1,3 +1,4 @@
+package EjercicioEmpleados;
 public class EmpleadoContratado{
     private int salario;
 
