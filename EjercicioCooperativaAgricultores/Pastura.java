@@ -5,11 +5,9 @@ import java.util.ArrayList;
 public class Pastura extends Cereal{
     private final int superficieMinima=50;
     private ArrayList<String> tiposPastura;
-    private ArrayList<String> cerealesNecesarios;
 
-    public Pastura(String nombre, ArrayList<String> cerealesNecesarios) {
+    public Pastura(String nombre) {
         super(nombre);
-        this.cerealesNecesarios=cerealesNecesarios;
     }
     public int getSuperficieMinima(){
         return superficieMinima;

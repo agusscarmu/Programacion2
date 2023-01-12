@@ -57,22 +57,23 @@ public class Lote {
         }
     }
 
-    public void verCerealesPosibles(ArrayList<Cereal>cereales){
-        for(int i=0;i<cereales.size();i++){
-            if(minerales.containsAll(cereales.get(i).getMineralesNecesarios())){
-                if(cereales.get(i).getTiposPastura().contains(cereales.get(i).getNombre())){
-                    for(int j=0;j<cereales.get(i).getPasturas().size();j++){
-                        if(cereales.get(i).getNombre()==cereales.get(i).getPasturas().get(j).getNombre()){
-                            if(getSuperficie()>cereales.get(i).getPasturas().get(j).getSuperficieMinima()){
-                                cerealesPosibles.add(new Cereal(cereales.get(i).getNombre(),cereales.get(i).getMineralesNecesarios()));
-                            }else{
-                                break;
-                            }
-                            }
-                    }
-                }
-                cerealesPosibles.add(new Cereal(cereales.get(i).getNombre()));
-                cereales.get(i).setMineralesNecesarios(cereales.get(i).getMineralesNecesarios());
+    public void verCerealesPosibles(ArrayList<CerealCosechaGruesa> cerealCosechaGruesa, ArrayList<CerealCosechaFina>cerealCosechaFina, ArrayList<Pastura>pastura){
+        for(int i=0;i<cerealCosechaGruesa.size();i++){
+            if(minerales.containsAll(cerealCosechaGruesa.get(i).getMineralesNecesarios())){   
+                cerealesPosibles.add(new Cereal(cerealCosechaGruesa.get(i).getNombre()));
+                cerealesPosibles.get(cerealesPosibles.size()-1).setMineralesNecesarios(cerealCosechaGruesa.get(i).getMineralesNecesarios());
+            }
+        }
+        for(int i=0;i<cerealCosechaFina.size();i++){
+            if(minerales.containsAll(cerealCosechaFina.get(i).getMineralesNecesarios())){   
+                cerealesPosibles.add(new Cereal(cerealCosechaFina.get(i).getNombre()));
+                cerealesPosibles.get(cerealesPosibles.size()-1).setMineralesNecesarios(cerealCosechaFina.get(i).getMineralesNecesarios());
+            }
+        }
+        for(int i=0;i<pastura.size();i++){
+            if(minerales.containsAll(pastura.get(i).getMineralesNecesarios())){   
+                cerealesPosibles.add(new Cereal(cerealCosechaFina.get(i).getNombre()));
+                cerealesPosibles.get(cerealesPosibles.size()-1).setMineralesNecesarios(pastura.get(i).getMineralesNecesarios());
             }
         }
     }

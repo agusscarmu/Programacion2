@@ -3,9 +3,8 @@ import java.util.ArrayList;
 
 public class CerealCosechaFina extends Cereal{
     private ArrayList<String> tiposCosechaFina;
-    private ArrayList<String> cerealesNecesarios;
 
-    public CerealCosechaFina(String nombre, ArrayList<String> cerealesNecesarios) {
+    public CerealCosechaFina(String nombre) {
         super(nombre);
     }
     public ArrayList<String> getTipoCereal(){
