@@ -2,8 +2,6 @@ package EjercicioAlquileres;
 
 import java.util.ArrayList;
 
-import javax.xml.crypto.KeySelector.Purpose;
-
 /* 
 Para evitar convertirse en un nuevo Blockbuster, un videoclub de barrio ha decidido diversificarse e 
 incorporar a su cartera de negocios el alquiler de autos. Para modernizarse, abandonará los registros en papel 
@@ -41,16 +39,16 @@ public class VideoClub {
     }
 
     public static void alquilar(ArrayList<Producto> producto,ArrayList<Cliente> cliente){
-        cliente.get(0).alquilar(producto.get(0),30,15,00,2023);
+        cliente.get(0).alquilar(producto.get(0),30,15,01,2023);
         producto.get(0).alquilado();
 
         cliente.get(1).alquilar(producto.get(3),5,10,01,2021);
         producto.get(4).alquilado();
 
-        cliente.get(2).alquilar(producto.get(4),30,28,10,2022);
+        cliente.get(2).alquilar(producto.get(4),30,28,12,2022);
         producto.get(3).alquilado();
 
-        cliente.get(3).alquilar(producto.get(0),20,3,00,2023);
+        cliente.get(3).alquilar(producto.get(1),20,3,01,2023);
         producto.get(2).alquilado();
 
         

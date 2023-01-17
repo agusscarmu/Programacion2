@@ -23,6 +23,7 @@ public abstract class Producto {
     public abstract void alquilado();
 
     public void alquilar(int tiempoDeAlquiler, int dia, int mes, int anio){
+        mes=mes-1;
         this.fechaEnGregoriano.set(anio, mes, dia);
         this.fechaActual=new Date(); 
         fechaEnGregoriano.add(fechaEnGregoriano.DAY_OF_YEAR,tiempoDeAlquiler);
