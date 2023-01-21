@@ -1,26 +1,25 @@
 package EjercicioPuerto;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 
-public class Camion extends Puerto{
+public class Camion implements Comparable<Camion>{ 
     private LocalDate fechaDeCarga;
+    private String nombre;
 
     public Camion(String nombre, LocalDate fechaDeCarga) {
-        super(nombre);
+        this.nombre = nombre;
         this.fechaDeCarga = fechaDeCarga;
-        setCargado(true);
     }
     public LocalDate getFechaDeCarga(){
         return fechaDeCarga;
     }
-    public void descarga(){
-        setCargado(false);
-    }
-
     @Override
     public String toString() {
-        return "Nombre: "+getNombre()+" Fecha de carga: "+getFechaDeCarga();
+        return "Nombre: "+nombre+" Fecha de carga: "+getFechaDeCarga();
+    }
+    @Override
+    public int compareTo(Camion otro) {
+        return this.getFechaDeCarga().compareTo(otro.getFechaDeCarga());
     }
 
 }

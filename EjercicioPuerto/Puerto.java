@@ -5,43 +5,38 @@ import java.util.Collections;
 
 public class Puerto {
     private String nombre;
-    private boolean cargado;
-    private ArrayList<Barco> listaEsperaB;
-    private ArrayList<Camion> listaEsperaC;
-
-    public Puerto(ArrayList<Barco> barcos, ArrayList<Camion> camiones){
-        this.listaEsperaB=barcos;
-        this.listaEsperaC=camiones;
-    }
-    public Puerto(String nombre){
-        this.nombre=nombre;
-        this.cargado=false;
-        
+    private ArrayList<Comparable> barcos;
+    private ArrayList<Comparable> camiones;
+    private ArrayList<Barco> barcosCargados;
+    
+    public Puerto(){
+        this.barcos=new ArrayList<>();
+        this.camiones= new ArrayList<>();
+        this.barcosCargados=new ArrayList<>();
     }
 
+    public void agregarBarco(Barco barco){
+        barcos.add(barco);
+    }
+    public void agregarCamion(Camion camion){
+        camiones.add(camion);
+    }
     public String getNombre(){
         return nombre;
     }
-    public boolean getCargado(){
-        return cargado;
-    }
-    public void setCargado(boolean carga){
-        cargado=carga;
-    }
-    
     public void acomodarListaDeEspera(){
-        ListaBarcosOrdenada listabarcos = new ListaBarcosOrdenada();
-        ListaCamionesOrdenada listacamiones = new ListaCamionesOrdenada();
-        Collections.sort(listaEsperaC, listacamiones);
-        Collections.sort(listaEsperaB, listabarcos);
+        Collections.sort(barcos);
+        Collections.sort(camiones);
+
     }
     public void cargarBarco(){
-        listaEsperaC.remove(listaEsperaC.get(0));
-        listaEsperaB.remove(listaEsperaB.get(0));
+        camiones.remove(camiones.get(0));
+        barcosCargados.add((Barco)barcos.get(0));
+        barcos.remove(barcos.get(0));
         
     }
     @Override
     public String toString() {
-        return "Barco en espera: "+listaEsperaB.toString()+" Camiones en espera: "+listaEsperaC.toString();
+        return "Barco en espera: "+barcos.toString()+" Camiones en espera: "+camiones.toString()+"\n Barcos cargados: "+barcosCargados.toString();
     }
 }
