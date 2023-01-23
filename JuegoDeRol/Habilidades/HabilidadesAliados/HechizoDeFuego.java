@@ -1,10 +1,12 @@
 package JuegoDeRol.Habilidades.HabilidadesAliados;
 
 import JuegoDeRol.Personaje;
-import JuegoDeRol.Enemigos.Enemigo;
+import JuegoDeRol.Grupos.Grupo;
+import JuegoDeRol.Grupos.Enemigos.Enemigo;
 import JuegoDeRol.Habilidades.Habilidad;
+import JuegoDeRol.Habilidades.HabilidadOfensiva;
 
-public class HechizoDeFuego extends Habilidad{
+public class HechizoDeFuego extends HabilidadOfensiva{
 
     final static String naturaleza="Fuego";
   
@@ -13,7 +15,7 @@ public class HechizoDeFuego extends Habilidad{
         super(nombre, danio, coste);
     }
     
-    public Personaje ejecutar(Personaje personaje, boolean critico){
+    public Grupo ejecutar(Grupo personaje, boolean critico){
         int impacto;
         if(((Enemigo)personaje).getDebilidad().equals(naturaleza)){
             if(critico){

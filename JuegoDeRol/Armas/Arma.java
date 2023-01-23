@@ -1,18 +1,18 @@
 package JuegoDeRol.Armas;
 
-import JuegoDeRol.Ofensivo;
+import JuegoDeRol.Grupos.Grupo;
 
-public class Arma{
+public abstract class Arma{
     private String nombre;
     private int danio;
     private int coste;
     protected int critico; 
+    protected int daniorealizado;
 
-    public Arma(String nombre, int danio, int coste, int critico) {
+    public Arma(String nombre, int danio, int coste) {
         this.nombre=nombre;
         this.danio=danio;
         this.coste = coste;
-        this.critico=critico;
     }
     public String getNombre(){
         return nombre;
@@ -26,4 +26,5 @@ public class Arma{
     public int getCritico(){
         return critico;
     }
+    public abstract Grupo atacar(Grupo grupo, boolean critico, int fuerza);
 }

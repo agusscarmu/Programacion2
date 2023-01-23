@@ -1,15 +1,17 @@
 package JuegoDeRol.Habilidades.HabilidadesEnemigos;
 
 import JuegoDeRol.Personaje;
+import JuegoDeRol.Grupos.Grupo;
 import JuegoDeRol.Habilidades.Habilidad;
+import JuegoDeRol.Habilidades.HabilidadOfensiva;
 
-public class Grito extends Habilidad{
+public class Grito extends HabilidadOfensiva{
 
     public Grito(String nombre, int danio, int coste){
         super(nombre, danio, coste);
     }
     
-    public Personaje ejecutar(Personaje personaje, boolean critico){
+    public Grupo ejecutar(Grupo personaje, boolean critico){
         personaje.cansancio(getPoder());
         System.out.println("Aturdido por grito, estamina: -"+getPoder());
         if(critico)

@@ -1,17 +1,21 @@
-package JuegoDeRol;
+package JuegoDeRol.Grupos.Aliados;
 
+import java.util.ArrayList;
+
+import JuegoDeRol.Personaje;
 import JuegoDeRol.Armas.Arma;
+import JuegoDeRol.Grupos.Grupo;
 import JuegoDeRol.Habilidades.Habilidad;
 
-public class Jugador extends Personaje {
+public class Jugador extends Grupo{
 
     private int mana;
     private Arma arma;
     private Habilidad hechizo;
     private int critico;
 
-    public Jugador(String nombre, int vida, int mana, int estamina, int fuerza, Arma arma, Habilidad hechizo, int critico) {
-        super(nombre, vida, fuerza, estamina,critico);
+    public Jugador(String nombre, int vida, int defensa, int mana, int estamina, int fuerza, Arma arma, Habilidad hechizo, int critico) {
+        super(nombre, vida, defensa,fuerza, estamina,critico);
         this.mana=mana;
         this.arma=arma;
         this.hechizo=hechizo;
@@ -29,22 +33,17 @@ public class Jugador extends Personaje {
         return hechizo;
     }
     @Override
-    public Personaje atacar(Personaje personaje, boolean critico) {
+    public Grupo atacar(Grupo personaje, boolean critico) {
         if(getEstamina()>arma.getCoste()){
-            int golpe=arma.getDanio()+(getFuerza()/2);
-            if(critico)
-            golpe=arma.getDanio()+(getFuerza());
             System.out.println("Ataco con: "+arma.getNombre());
-            personaje.impacto(golpe);
-            System.out.println("golpe realizado: "+golpe);
+            arma.atacar(personaje, critico, (getFuerza()/2));
             cansancio(arma.getCoste());
             return personaje;
         }else
         System.out.println("Estamina baja!");
         return personaje;
     }
-
-    public Personaje atacarConMagia(Personaje personaje, boolean critico){
+    public Grupo utilizarMagia(Grupo personaje, boolean critico){
         if(mana>hechizo.getCoste()){
         System.out.println("Lanzo: "+hechizo.getNombre());
         hechizo.ejecutar(personaje,critico);
@@ -54,4 +53,24 @@ public class Jugador extends Personaje {
         System.out.println("Mana insuficiente!");
         return personaje;
     }
+    @Override
+    public void agregarIntegrante(Grupo enemigo) {
+    }
+    @Override
+    public int verPoderDeAtaque() {
+        return getFuerza();
+    }
+    @Override
+    public int verVida() {
+        return getVida();
+    }
+    @Override
+    public ArrayList<Grupo> getGrupo() {
+        return null;
+    }
+    @Override
+    public void setRecuperacion(int recuperacion) {
+        recuperacion(recuperacion);
+    }
+
 }

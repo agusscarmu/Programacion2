@@ -1,17 +1,21 @@
 package JuegoDeRol;
 
-public abstract class Personaje extends Juego{
+import JuegoDeRol.Grupos.Grupo;
+
+public abstract class Personaje{
     
     private String nombre;
     private int vida;
     private int fuerza;
     private int estamina;
     private int critico;
+    private int defensa;
 
     public Personaje(){}
-    public Personaje(String nombre, int vida, int fuerza, int estamina,int critico){
+    public Personaje(String nombre, int vida, int defensa,int fuerza, int estamina,int critico){
         this.nombre=nombre;
         this.vida=vida;
+        this.defensa=defensa;
         this.fuerza=fuerza;
         this.estamina=estamina;
         this.critico=critico;
@@ -38,7 +42,11 @@ public abstract class Personaje extends Juego{
         estamina-=debuff;
     }
     public void impacto(int golpe){
-        vida-=golpe;
+        vida-=golpe-golpe*defensa/100;
+    }
+    public void impacto(int golpe, int defensaRota){
+        int defensaRobada = 100-defensaRota;
+        vida-=golpe-golpe*(defensa*defensaRobada/100)/100;
     }
     public void curacion(int cura){
         vida+=cura;
@@ -46,5 +54,5 @@ public abstract class Personaje extends Juego{
     public void buff(int buff){
         fuerza+=buff;
     }
-    public abstract Personaje atacar(Personaje personaje, boolean critico);
+    public abstract Grupo atacar(Grupo personaje, boolean critico);
 }

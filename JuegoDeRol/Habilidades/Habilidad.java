@@ -1,18 +1,20 @@
 package JuegoDeRol.Habilidades;
 
 import JuegoDeRol.Personaje;
+import JuegoDeRol.Grupos.Grupo;
 
 public abstract class Habilidad {
     private String nombre;
     private int poder;
     private int coste;
+    protected boolean ofensivo;
 
     public Habilidad(String nombre, int poder, int coste){
         this.nombre=nombre;
         this.poder=poder;
         this.coste=coste;
     }
-    public abstract Personaje ejecutar(Personaje personaje, boolean critico);
+    public abstract Grupo ejecutar(Grupo personaje, boolean critico);
     
     public int getPoder(){
         return poder;
@@ -22,5 +24,9 @@ public abstract class Habilidad {
     }
     public int getCoste(){
         return coste;
+    }
+    
+    public boolean esOfensivo(){
+        return ofensivo;
     }
 }
