@@ -44,7 +44,7 @@ public class Laboratorio {
         estudioProteico.agregarProteinas(p5);
         estudioProteico.agregarProteinas(p6);
  
-        ArrayList<ADN>busqueda=estudioProteico.buscar("reparacion");
+        ArrayList<ADN>busqueda=estudioGenomico.buscar("p53");
         System.out.println(busqueda);
     }
 }
