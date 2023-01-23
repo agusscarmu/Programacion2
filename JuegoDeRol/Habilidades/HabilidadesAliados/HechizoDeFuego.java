@@ -1,9 +1,10 @@
-package JuegoDeRol.Hechizos;
+package JuegoDeRol.Habilidades.HabilidadesAliados;
 
 import JuegoDeRol.Personaje;
 import JuegoDeRol.Enemigos.Enemigo;
+import JuegoDeRol.Habilidades.Habilidad;
 
-public class HechizoDeFuego extends Hechizo{
+public class HechizoDeFuego extends Habilidad{
 
     final static String naturaleza="Fuego";
   

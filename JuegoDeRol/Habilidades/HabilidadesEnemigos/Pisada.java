@@ -1,6 +1,7 @@
-package JuegoDeRol.Habilidades;
+package JuegoDeRol.Habilidades.HabilidadesEnemigos;
 
 import JuegoDeRol.Personaje;
+import JuegoDeRol.Habilidades.Habilidad;
 
 public class Pisada extends Habilidad{
 

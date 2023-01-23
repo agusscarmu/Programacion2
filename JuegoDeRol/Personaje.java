@@ -1,6 +1,6 @@
 package JuegoDeRol;
 
-public abstract class Personaje {
+public abstract class Personaje extends Juego{
     
     private String nombre;
     private int vida;
@@ -8,6 +8,7 @@ public abstract class Personaje {
     private int estamina;
     private int critico;
 
+    public Personaje(){}
     public Personaje(String nombre, int vida, int fuerza, int estamina,int critico){
         this.nombre=nombre;
         this.vida=vida;

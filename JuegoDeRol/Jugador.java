@@ -1,16 +1,16 @@
 package JuegoDeRol;
 
 import JuegoDeRol.Armas.Arma;
-import JuegoDeRol.Hechizos.Hechizo;
+import JuegoDeRol.Habilidades.Habilidad;
 
 public class Jugador extends Personaje {
 
     private int mana;
     private Arma arma;
-    private Hechizo hechizo;
+    private Habilidad hechizo;
     private int critico;
 
-    public Jugador(String nombre, int vida, int mana, int estamina, int fuerza, Arma arma, Hechizo hechizo, int critico) {
+    public Jugador(String nombre, int vida, int mana, int estamina, int fuerza, Arma arma, Habilidad hechizo, int critico) {
         super(nombre, vida, fuerza, estamina,critico);
         this.mana=mana;
         this.arma=arma;
@@ -25,7 +25,7 @@ public class Jugador extends Personaje {
     public int getMana(){
         return mana;
     }
-    public Hechizo getHechizo(){
+    public Habilidad getHechizo(){
         return hechizo;
     }
     @Override

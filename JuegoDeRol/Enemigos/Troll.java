@@ -2,11 +2,11 @@ package JuegoDeRol.Enemigos;
 
 import JuegoDeRol.Dado;
 import JuegoDeRol.Personaje;
-import JuegoDeRol.Habilidades.Grito;
 import JuegoDeRol.Habilidades.Habilidad;
-import JuegoDeRol.Habilidades.Pisada;
+import JuegoDeRol.Habilidades.HabilidadesEnemigos.Grito;
+import JuegoDeRol.Habilidades.HabilidadesEnemigos.Pisada;
 
-public class Troll extends Enemigo {
+public class Troll extends Enemigo{
     protected Habilidad habilidad1;
     protected Habilidad habilidad2;
 
@@ -26,7 +26,9 @@ public class Troll extends Enemigo {
             return habilidad(habilidad2,personaje,critico);
         }
     }
-
+    public int verPoderDeAtaque(){
+        return getFuerza();
+    }
     public Personaje habilidad(Habilidad habilidad,Personaje personaje, boolean critico){
         if(getEstamina()>habilidad.getCoste()){
             System.out.println(getNombre()+" lanza: "+habilidad.getNombre());
@@ -37,5 +39,11 @@ public class Troll extends Enemigo {
             System.out.println("El troll esta cansado!");
             return personaje;
     }
+
+    @Override
+    public void agregarEnemigos(ElementoHostil enemigo) {
+    }
+
+
     
 }
