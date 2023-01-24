@@ -30,7 +30,7 @@ public class Juego {
         int sala=1;
         for(Grupo enemigo: enemigos.getGrupo()){
             System.out.println("\nSala: "+sala);
-        while(!estadoPartida(aliados.getGrupo()) && !estadoPartida(enemigos.getGrupo())){ 
+        while(!estadoPartida(aliados.getGrupo()) && !estadoPartida(enemigo.getGrupo())){ 
             System.out.println("\n");       
             for(int i=0;i<enemigo.getGrupo().size();i++){
                 System.out.println("Enemigo: "+(i+1)+"-"+enemigo.getGrupo().get(i).getNombre()+", Vida: "+((Grupo)enemigo).getGrupo().get(i).getVida());
@@ -44,7 +44,7 @@ public class Juego {
         aliados.setRecuperacion(5);
         enemigos.setRecuperacion(4);  
         }
-        if(estadoPartida(enemigos.getGrupo())){
+        if(estadoPartida(enemigo.getGrupo())){
         System.out.println("\nSala "+sala+" completada");
         }
         if(estadoPartida(aliados.getGrupo())){
