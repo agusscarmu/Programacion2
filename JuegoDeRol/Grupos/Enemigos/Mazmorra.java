@@ -3,7 +3,6 @@ package JuegoDeRol.Grupos.Enemigos;
 import java.util.ArrayList;
 import java.util.Collections;
 
-import JuegoDeRol.Personaje;
 import JuegoDeRol.Grupos.Grupo;
 
 public class Mazmorra extends Grupo{

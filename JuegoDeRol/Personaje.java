@@ -42,11 +42,13 @@ public abstract class Personaje{
         estamina-=debuff;
     }
     public void impacto(int golpe){
-        vida-=golpe-golpe*defensa/100;
+        vida = vida - (golpe-(golpe*defensa/100));
+        System.out.println("Danio realizado: "+ (golpe-(golpe*defensa/100)));
     }
     public void impacto(int golpe, int defensaRota){
         int defensaRobada = 100-defensaRota;
-        vida-=golpe-golpe*(defensa*defensaRobada/100)/100;
+        vida = vida - (golpe+(golpe*(defensa*defensaRobada/100)/100));
+        System.out.println("Danio realizado: "+ (golpe+(golpe*(defensa*defensaRobada/100)/100)));
     }
     public void curacion(int cura){
         vida+=cura;

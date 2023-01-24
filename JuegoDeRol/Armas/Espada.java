@@ -19,23 +19,17 @@ public class Espada extends Arma {
         estocada=r.nextBoolean();
         if(critico){
             if(estocada){
-                daniorealizado=getDanio()*2+fuerza;
-                enemigo.impacto(daniorealizado);
+                enemigo.impacto(getDanio()*2+fuerza);
                 System.out.println("Estocada!");
             }else
-                daniorealizado=getDanio()+(getDanio()/3)+fuerza;
-                enemigo.impacto(daniorealizado);
+                enemigo.impacto(getDanio()+(getDanio()/3)+fuerza);
         }else{
             if(estocada){
-                daniorealizado=getDanio()+(getDanio()/3)+fuerza;
-                enemigo.impacto(daniorealizado);
+                enemigo.impacto(getDanio()+(getDanio()/3)+fuerza);
                 System.out.println("Estocada!");
             }else
-                daniorealizado=getDanio()+fuerza;
-                enemigo.impacto(daniorealizado); 
+                enemigo.impacto(getDanio()+fuerza); 
         }
-        System.out.println("Danio realizado: "+daniorealizado);
-
         return enemigo;
     }
     

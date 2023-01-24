@@ -3,7 +3,6 @@ package JuegoDeRol.Grupos.Enemigos;
 import java.util.ArrayList;
 
 import JuegoDeRol.Dado;
-import JuegoDeRol.Personaje;
 import JuegoDeRol.Grupos.Grupo;
 import JuegoDeRol.Habilidades.Habilidad;
 import JuegoDeRol.Habilidades.HabilidadesEnemigos.Grito;
@@ -38,7 +37,7 @@ public class Troll extends Enemigo{
     public Grupo habilidad(Habilidad habilidad,Grupo personaje, boolean critico){
         if(getEstamina()>habilidad.getCoste()){
             System.out.println("\n"+getNombre()+" lanza: "+habilidad.getNombre()+" a "+personaje.getNombre());
-            habilidad.ejecutar(personaje, critico);
+            habilidad.ejecutar(personaje, critico, (getFuerza()/2));
             cansancio(habilidad.getCoste());
             return personaje;
         }else

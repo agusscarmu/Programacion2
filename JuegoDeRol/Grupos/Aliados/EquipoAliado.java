@@ -2,7 +2,6 @@ package JuegoDeRol.Grupos.Aliados;
 
 import java.util.ArrayList;
 
-import JuegoDeRol.Personaje;
 import JuegoDeRol.Grupos.Grupo;
 
 public class EquipoAliado extends Grupo{

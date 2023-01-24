@@ -2,7 +2,6 @@ package JuegoDeRol.Grupos.Aliados;
 
 import java.util.ArrayList;
 
-import JuegoDeRol.Personaje;
 import JuegoDeRol.Armas.Arma;
 import JuegoDeRol.Grupos.Grupo;
 import JuegoDeRol.Habilidades.Habilidad;
@@ -43,10 +42,10 @@ public class Jugador extends Grupo{
         System.out.println("Estamina baja!");
         return personaje;
     }
-    public Grupo utilizarMagia(Grupo personaje, boolean critico){
+    public Grupo utilizarMagia(Grupo personaje, boolean critico, int boost){
         if(mana>hechizo.getCoste()){
         System.out.println("Lanzo: "+hechizo.getNombre());
-        hechizo.ejecutar(personaje,critico);
+        hechizo.ejecutar(personaje,critico, boost);
         mana-=hechizo.getCoste();
         return personaje;
         }else

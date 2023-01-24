@@ -12,21 +12,15 @@ public class Daga extends Arma{
 
     @Override
     public Grupo atacar(Grupo enemigo, boolean critico, int fuerza) {
-        if(critico){
-        daniorealizado=getDanio()*5+fuerza/2;
-        enemigo.impacto(daniorealizado);
-        }else{
-        daniorealizado=getDanio()+fuerza/2;
-        enemigo.impacto(daniorealizado);
-        }
-        System.out.println("Danio realizado: "+daniorealizado);
-
-        return enemigo;
+        if(critico)
+        enemigo.impacto(getDanio()*5+fuerza/2);
+        else
+        enemigo.impacto(getDanio()+fuerza/2);
+        return null;
     }
 
     @Override
     public int getCritico(){
         return super.getCritico()+(afilado/2);
     }
-    
 }

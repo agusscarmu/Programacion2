@@ -1,8 +1,6 @@
 package JuegoDeRol.Habilidades.HabilidadesEnemigos;
 
-import JuegoDeRol.Personaje;
 import JuegoDeRol.Grupos.Grupo;
-import JuegoDeRol.Habilidades.Habilidad;
 import JuegoDeRol.Habilidades.HabilidadOfensiva;
 
 public class Grito extends HabilidadOfensiva{
@@ -11,14 +9,14 @@ public class Grito extends HabilidadOfensiva{
         super(nombre, danio, coste);
     }
     
-    public Grupo ejecutar(Grupo personaje, boolean critico){
-        personaje.cansancio(getPoder());
-        System.out.println("Aturdido por grito, estamina: -"+getPoder());
+    public Grupo ejecutar(Grupo personaje, boolean critico, int fuerza){
+        personaje.cansancio(getPoder()+fuerza);
+        System.out.println("Aturdido por grito, estamina: -"+getPoder()+fuerza);
         if(critico)
-        personaje.impacto(getPoder());
+        personaje.impacto(getPoder()+fuerza);
         else
-        personaje.impacto(getPoder()/2);
-        System.out.println("Te sangran los oidos, vida: -"+getPoder()/2);
+        personaje.impacto(getPoder()/2+fuerza);
+        System.out.println("Te sangran los oidos");
         return personaje;
     }
 }

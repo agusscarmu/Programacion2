@@ -1,6 +1,5 @@
 package JuegoDeRol.Habilidades;
 
-import JuegoDeRol.Personaje;
 import JuegoDeRol.Grupos.Grupo;
 
 public abstract class Habilidad {
@@ -14,7 +13,7 @@ public abstract class Habilidad {
         this.poder=poder;
         this.coste=coste;
     }
-    public abstract Grupo ejecutar(Grupo personaje, boolean critico);
+    public abstract Grupo ejecutar(Grupo personaje, boolean critico, int fuerza);
     
     public int getPoder(){
         return poder;

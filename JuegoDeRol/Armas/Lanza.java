@@ -17,23 +17,17 @@ public class Lanza extends Espada{
         estocada=r.nextBoolean();
         if(critico){
             if(estocada){
-                daniorealizado=getDanio()*3+fuerza;
-                enemigo.impacto(daniorealizado);
+                enemigo.impacto(getDanio()*3+fuerza);
                 System.out.println("Estocada!");
             }else
-                daniorealizado=getDanio()+(getDanio()/4)+fuerza;
-                enemigo.impacto(daniorealizado);
+                enemigo.impacto(getDanio()+(getDanio()/4)+fuerza);
         }else{
             if(estocada){
-                daniorealizado=getDanio()+(getDanio()/2)+fuerza;
-                enemigo.impacto(daniorealizado);
+                enemigo.impacto(getDanio()+(getDanio()/2)+fuerza);
                 System.out.println("Estocada!");
             }else
-                daniorealizado=getDanio()+fuerza;
-                enemigo.impacto(daniorealizado); 
+                enemigo.impacto(getDanio()+fuerza); 
         }
-        System.out.println("Danio realizado: "+daniorealizado);
-
         return enemigo;
     }
     

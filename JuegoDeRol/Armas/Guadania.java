@@ -12,16 +12,10 @@ public class Guadania extends Arma {
 
     @Override
     public Grupo atacar(Grupo enemigo, boolean critico, int fuerza) {
-        if(critico){
-        daniorealizado=getDanio()+fuerza;
-        enemigo.impacto(daniorealizado,(porcentajeDeArmaduraRobada*2));
-        }
-        else{
-        daniorealizado=getDanio()+fuerza;
-        enemigo.impacto(daniorealizado,porcentajeDeArmaduraRobada);
-        }
-        System.out.println("Danio realizado: "+daniorealizado);
-
+        if(critico)
+        enemigo.impacto((getDanio()+fuerza),(porcentajeDeArmaduraRobada*2));
+        else
+        enemigo.impacto((getDanio()+fuerza),porcentajeDeArmaduraRobada);
         return enemigo;
     }
     

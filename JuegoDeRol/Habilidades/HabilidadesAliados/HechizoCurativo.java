@@ -11,11 +11,11 @@ public class HechizoCurativo extends HabilidadDefensiva {
     }
 
     @Override
-    public Grupo ejecutar(Grupo personaje, boolean critico) {
+    public Grupo ejecutar(Grupo personaje, boolean critico, int vida) {
         if(critico)
-            personaje.curacion(getPoder()*2);
+            personaje.curacion(getPoder()*2+vida);
         else
-            personaje.curacion(getPoder());
+            personaje.curacion(getPoder()+vida);
         return personaje;
     }
     

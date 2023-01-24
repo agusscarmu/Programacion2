@@ -1,8 +1,6 @@
 package JuegoDeRol.Habilidades.HabilidadesEnemigos;
 
-import JuegoDeRol.Personaje;
 import JuegoDeRol.Grupos.Grupo;
-import JuegoDeRol.Habilidades.Habilidad;
 import JuegoDeRol.Habilidades.HabilidadOfensiva;
 
 public class Pisada extends HabilidadOfensiva{
@@ -12,12 +10,12 @@ public class Pisada extends HabilidadOfensiva{
     }
 
     @Override
-    public Grupo ejecutar(Grupo personaje, boolean critico) {
+    public Grupo ejecutar(Grupo personaje, boolean critico, int fuerza) {
         if(critico){
-        personaje.impacto(getPoder()*2);
+        personaje.impacto(getPoder()*2+fuerza);
         System.out.println("Fuiste pisado, vida: -"+getPoder()*2);
         }else{
-        personaje.impacto(getPoder());
+        personaje.impacto(getPoder()+fuerza);
         System.out.println("Fuiste pisado, vida: -"+getPoder());
         }
         return personaje;

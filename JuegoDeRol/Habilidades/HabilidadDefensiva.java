@@ -1,6 +1,5 @@
 package JuegoDeRol.Habilidades;
 
-import JuegoDeRol.Grupos.Grupo;
 
 public abstract class HabilidadDefensiva extends Habilidad {
 

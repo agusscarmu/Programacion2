@@ -1,6 +1,5 @@
 package JuegoDeRol.Grupos.Enemigos;
 
-import JuegoDeRol.Personaje;
 import JuegoDeRol.Grupos.Grupo;
 
 public abstract class Enemigo extends Grupo{

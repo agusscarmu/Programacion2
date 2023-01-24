@@ -14,14 +14,10 @@ public class Martillo extends Arma {
     @Override
     public Grupo atacar(Grupo enemigo, boolean critico, int fuerza) {
         if(critico){
-            daniorealizado=getDanio()+(getDanio()/2)+peso+fuerza;
-            enemigo.impacto(daniorealizado);
+            enemigo.impacto(getDanio()+(getDanio()/2)+peso+fuerza);
         }else{
-            daniorealizado=getDanio()+peso+fuerza;
-            enemigo.impacto(daniorealizado);
+            enemigo.impacto(getDanio()+peso+fuerza);
         }
-        System.out.println("Danio realizado: "+daniorealizado);
-
         return enemigo;
     }
 

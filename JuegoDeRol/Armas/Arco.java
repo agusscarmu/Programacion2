@@ -22,22 +22,17 @@ public class Arco extends Arma{
         headshot=r.nextInt(100);
         if(critico){
             if(headshot<precision){
-                daniorealizado=getDanio()*4+fuerza/2;
-                enemigo.impacto(daniorealizado);
+                enemigo.impacto(getDanio()*4+fuerza/2);
                 System.out.println("Headshot!");
             }else
-                daniorealizado=getDanio()*2+fuerza/2;
-                enemigo.impacto(daniorealizado);
+                enemigo.impacto(getDanio()*2+fuerza/2);
         }else{
             if(headshot<precision){
-                daniorealizado=getDanio()*2+fuerza/2;
-                enemigo.impacto(daniorealizado);
+                enemigo.impacto(getDanio()*2+fuerza/2);
                 System.out.println("Headshot!");
             }else
-                daniorealizado=getDanio()+fuerza/2;
-                enemigo.impacto(daniorealizado);
+                enemigo.impacto(getDanio()+fuerza/2);
         }
-        System.out.println("Danio realizado: "+daniorealizado);
         return enemigo;
     }
 }
