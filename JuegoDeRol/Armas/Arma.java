@@ -4,9 +4,6 @@ import JuegoDeRol.ElementosUtilizables;
 import JuegoDeRol.Grupos.Grupo;
 
 public abstract class Arma extends ElementosUtilizables{
-    private String nombre;
-    private int danio;
-    private int coste;
     protected int critico; 
     protected int daniorealizado;
     protected String pasiva;

@@ -4,9 +4,6 @@ import JuegoDeRol.ElementosUtilizables;
 import JuegoDeRol.Grupos.Grupo;
 
 public abstract class Habilidad extends ElementosUtilizables{
-    private String nombre;
-    private int poder;
-    private int coste;
     protected boolean ofensivo;
 
     public Habilidad(String nombre, int poder, int coste){

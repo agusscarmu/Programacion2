@@ -5,11 +5,9 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Random;
 
-import JuegoDeRol.Armas.Arma;
 import JuegoDeRol.Grupos.Grupo;
 import JuegoDeRol.Grupos.Aliados.Jugador;
 import JuegoDeRol.Grupos.Enemigos.Enemigo;
-import JuegoDeRol.Habilidades.Habilidad;
 
 
 public class Juego {
