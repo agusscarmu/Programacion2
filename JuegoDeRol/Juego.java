@@ -18,15 +18,17 @@ public class Juego {
     Random r;
     ArrayList<ElementosUtilizables> arsenal;
     ArrayList<ElementosUtilizables> conjuros;
-    final static int NroDeAcciones=4;
-    final static int NroDeAccionesInteractivas=2;
+    ArrayList<ElementosUtilizables> pociones;
+    final static int NroDeAcciones=6;
+    final static int NroDeAccionesInteractivas=3;
 
-    public Juego(Grupo enemigos, Grupo aliados, ArrayList<ElementosUtilizables> arsenal, ArrayList<ElementosUtilizables> conjuros){
+    public Juego(Grupo enemigos, Grupo aliados, ArrayList<ElementosUtilizables> arsenal, ArrayList<ElementosUtilizables> conjuros, ArrayList<ElementosUtilizables> pociones){
         this.entrada = new BufferedReader(new InputStreamReader(System.in));
         this.enemigos=enemigos;
         this.aliados=aliados;
         this.arsenal=arsenal;
         this.conjuros=conjuros;
+        this.pociones=pociones;
         this.dado=new Dado();
         this.r = new Random();
     }
@@ -85,14 +87,11 @@ public class Juego {
                     System.out.println("\nTurno de: "+((Jugador)aliado).getNombre());
                     while(accion<1){
                         System.out.println("1 Para atacar con: "+((Jugador)aliado).getArma().getNombre()+"\n2 Para tirar hechizo: "+((Jugador)aliado).getHechizo().getNombre()
-                            +"\n3 Para cambiar de arma\n4 Para cambiar de hechizo");
+                            +"\n3 Para usar: "+((Jugador)aliado).getPocion().getNombre()+"\n4 Para cambiar de arma\n5 Para cambiar de hechizo\n6 Para cambiar de pocion");
                         accion = new Integer(entrada.readLine());
                         if(accion>NroDeAcciones){
                             accion=0;
                             System.out.println("Ingresa un valor entre las opciones disponibles.");
-                        }
-                        if(objetivo>(enemigo.size()-1)){
-                            System.out.println("Elija entre los objetivos presentes.");
                         }
                             switch (accion) {
                                 case 1:
@@ -119,11 +118,25 @@ public class Juego {
                                         break;
                                     }
                                 case 3:
+                                    while(turnoJugador){
+                                        if(usarPocion(aliado)){
+                                        turnoJugador=false;
+                                        break;
+                                        }
+                                        else
+                                        break;
+                                    }
+                                    break;
+                                case 4:
                                     equipar(aliado,arsenal,accion);
                                     accion=0;
                                     break;
-                                case 4:
+                                case 5:
                                     equipar(aliado,conjuros,accion);
+                                    accion=0;
+                                    break;
+                                case 6:
+                                    equipar(aliado,pociones,accion);
                                     accion=0;
                                     break;
                             }
@@ -135,6 +148,15 @@ public class Juego {
                 System.out.println(e);
             }              
         }                           
+    }
+    public boolean usarPocion(Grupo aliado){
+        if(((Jugador)aliado).getPocion().getUsos()<0){
+            System.out.println("No tenes mas usos disponibles");
+            return false;
+        }else{
+            ((Jugador)aliado).usarPocion();
+            return true;
+        }
     }
     public void atacar(ArrayList<Grupo>enemigo, int esCritico, Grupo aliado, int accion){
         int objetivo;
@@ -258,12 +280,16 @@ public class Juego {
                 }
                 eleccion=new Integer(entrada.readLine())-1;
                 if(eleccion<elemento.size()){
-                    if(accion==3){
+                    if(accion==4){
                         ((Jugador)aliado).setArma(elemento.get(eleccion));
                         decision=true;
                     }
-                    if(accion==4){
+                    if(accion==5){
                         ((Jugador)aliado).setHechizo(elemento.get(eleccion));
+                        decision=true;
+                    }
+                    if(accion==6){
+                        ((Jugador)aliado).setPocion(elemento.get(eleccion));
                         decision=true;
                     }
                 }else{

@@ -20,6 +20,9 @@ import JuegoDeRol.Grupos.Enemigos.Troll;
 import JuegoDeRol.Habilidades.Habilidad;
 import JuegoDeRol.Habilidades.HabilidadesAliados.HechizoCurativo;
 import JuegoDeRol.Habilidades.HabilidadesAliados.HechizoDeFuego;
+import JuegoDeRol.Pociones.Pocion;
+import JuegoDeRol.Pociones.PocionDeMana;
+import JuegoDeRol.Pociones.PocionDeVida;
 
 public class Menu {
     
@@ -31,7 +34,13 @@ public class Menu {
         Arma arco = new Arco("Arco curvo", 15, 10, 90, 10);
         Arma guadania = new Guadania("Parca", 14, 10);
         Arma espadasDuales = new ArmaDual("Espadas gemelas", 15, 15, 1);
-        
+
+        Pocion pocionDeVida = new PocionDeVida("Pocion de vida", 50, 10, 3);
+        Pocion pocionDeMana = new PocionDeMana("Pocion de mana", 70, 10, 3);
+        ArrayList<ElementosUtilizables> pociones = new ArrayList<>();
+        pociones.add(pocionDeVida);
+        pociones.add(pocionDeMana);
+
         Grupo mazmorra = new Mazmorra();
         Grupo sala1 = new Mazmorra();
         Grupo sala2 = new Mazmorra();
@@ -55,10 +64,10 @@ public class Menu {
         conjuros.add(bolaDeFuego);
         conjuros.add(auraCurativa);
 
-        Personaje jugador = new Jugador("iSpectroh", 100, 20,54400440,7000, 10, arco, bolaDeFuego,10);
-        Personaje aliado1 = new Jugador("Tina", 100, 10,400, 300, 80, guadania, bolaDeFuego, 20);
-        Personaje aliado2 = new Jugador("Terah", 100, 40,200, 300, 20, martillo, auraCurativa, 0);
-        Personaje aliado3 = new Jugador("Escaldaron", 100, 5,600, 300, 80, daga, bolaDeFuego, 10);
+        Personaje jugador = new Jugador("iSpectroh", 100, 20,54400440,7000, 10, arco, bolaDeFuego, pocionDeVida,10);
+        Personaje aliado1 = new Jugador("Tina", 100, 10,400, 300, 80, guadania, bolaDeFuego, pocionDeVida, 20);
+        Personaje aliado2 = new Jugador("Terah", 100, 40,200, 300, 20, martillo, auraCurativa, pocionDeMana, 0);
+        Personaje aliado3 = new Jugador("Escaldaron", 100, 5,600, 300, 80, daga, bolaDeFuego, pocionDeMana,10);
 
         Personaje troll1 = new Troll("Gadunta", 300, 10, 400, 80, "Fuego",0); 
         Personaje troll2 = new Troll("Gorfo", 340, 10, 430, 82, "Hielo",0); 
@@ -85,7 +94,7 @@ public class Menu {
         sala3.agregarIntegrante((Enemigo)troll6);
         sala3.agregarIntegrante((Enemigo)troll7);
 
-        Juego juego = new Juego(mazmorra, grupoAliado, arsenal, conjuros);
+        Juego juego = new Juego(mazmorra, grupoAliado, arsenal, conjuros, pociones);
         
         ((Mazmorra)mazmorra).ordenarSalas();
         juego.jugar();

@@ -13,6 +13,7 @@ public abstract class Personaje{
     private int mana;
     private int vidaMaxima;
     private int manaMaximo;
+    
 
     public Personaje(){}
     public Personaje(String nombre, int vida, int defensa, int mana, int fuerza, int estamina,int critico){
@@ -61,6 +62,9 @@ public abstract class Personaje{
     }
     public int getFuerza(){
         return fuerza;
+    }
+    public void recuperarMana(int manaRecuperado){
+        mana+=manaRecuperado;
     }
     public void recuperacion(int recuperacion){
         estamina+=recuperacion;

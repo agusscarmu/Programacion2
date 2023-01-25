@@ -6,16 +6,19 @@ import JuegoDeRol.ElementosUtilizables;
 import JuegoDeRol.Armas.Arma;
 import JuegoDeRol.Grupos.Grupo;
 import JuegoDeRol.Habilidades.Habilidad;
+import JuegoDeRol.Pociones.Pocion;
 
 public class Jugador extends Grupo{
 
     private Arma arma;
     private Habilidad hechizo;
     private int critico;
+    private Pocion pocion;
 
-    public Jugador(String nombre, int vida, int defensa, int mana, int estamina, int fuerza, Arma arma, Habilidad hechizo, int critico) {
+    public Jugador(String nombre, int vida, int defensa, int mana, int estamina, int fuerza, Arma arma, Habilidad hechizo, Pocion pocion,int critico) {
         super(nombre, vida, defensa, mana,fuerza, estamina,critico);
         this.arma=arma;
+        this.pocion=pocion;
         this.hechizo=hechizo;
     }
     public int getCritico(){
@@ -26,6 +29,12 @@ public class Jugador extends Grupo{
     }
     public Habilidad getHechizo(){
         return hechizo;
+    }
+    public Pocion getPocion(){
+        return pocion;
+    }
+    public void usarPocion(){
+        pocion.usar(this);
     }
     @Override
     public Grupo atacar(Grupo personaje, boolean critico) {
@@ -53,6 +62,9 @@ public class Jugador extends Grupo{
     }
     public void setHechizo(ElementosUtilizables newHechizo){
         hechizo=(Habilidad)newHechizo;
+    }
+    public void setPocion(ElementosUtilizables newPocion){
+        pocion=(Pocion)newPocion;
     }
     @Override
     public void agregarIntegrante(Grupo enemigo) {
