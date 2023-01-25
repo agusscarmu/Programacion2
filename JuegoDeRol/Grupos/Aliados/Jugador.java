@@ -2,6 +2,7 @@ package JuegoDeRol.Grupos.Aliados;
 
 import java.util.ArrayList;
 
+import JuegoDeRol.ElementosUtilizables;
 import JuegoDeRol.Armas.Arma;
 import JuegoDeRol.Grupos.Grupo;
 import JuegoDeRol.Habilidades.Habilidad;
@@ -51,6 +52,12 @@ public class Jugador extends Grupo{
         }else
         System.out.println("Mana insuficiente!");
         return personaje;
+    }
+    public void setArma(ElementosUtilizables newArma){
+        arma=(Arma)newArma;
+    }
+    public void setHechizo(ElementosUtilizables newHechizo){
+        hechizo=(Habilidad)newHechizo;
     }
     @Override
     public void agregarIntegrante(Grupo enemigo) {

@@ -9,6 +9,7 @@ public class Lanza extends Espada{
     public Lanza(String nombre, int danio, int coste, int critico) {
         super(nombre, danio, coste, critico);
         this.estocada=false;
+        pasiva="Probabilidad de estoque potenciado, pero menos danio si no es estoque";
     }
 
     @Override
@@ -17,16 +18,16 @@ public class Lanza extends Espada{
         estocada=r.nextBoolean();
         if(critico){
             if(estocada){
-                enemigo.impacto(getDanio()*3+fuerza);
+                enemigo.impacto(getPoder()*3+fuerza);
                 System.out.println("Estocada!");
             }else
-                enemigo.impacto(getDanio()+(getDanio()/4)+fuerza);
+                enemigo.impacto(getPoder()+(getPoder()/4)+fuerza);
         }else{
             if(estocada){
-                enemigo.impacto(getDanio()+(getDanio()/2)+fuerza);
+                enemigo.impacto(getPoder()+(getPoder()/2)+fuerza);
                 System.out.println("Estocada!");
             }else
-                enemigo.impacto(getDanio()+fuerza); 
+                enemigo.impacto(getPoder()+fuerza); 
         }
         return enemigo;
     }

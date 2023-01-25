@@ -9,14 +9,15 @@ public class Martillo extends Arma {
         super(nombre, danio, coste);
         this.peso=peso;
         critico=0;
+        pasiva="Aumenta enormemente el danio en base al peso, pero tambien su coste";
     }
 
     @Override
     public Grupo atacar(Grupo enemigo, boolean critico, int fuerza) {
         if(critico){
-            enemigo.impacto(getDanio()+(getDanio()/2)+peso+fuerza);
+            enemigo.impacto(getPoder()+(getPoder()/2)+peso+fuerza);
         }else{
-            enemigo.impacto(getDanio()+peso+fuerza);
+            enemigo.impacto(getPoder()+peso+fuerza);
         }
         return enemigo;
     }

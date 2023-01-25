@@ -8,14 +8,15 @@ public class Guadania extends Arma {
     public Guadania(String nombre, int danio, int coste) {
         super(nombre, danio, coste);
         critico=0;
+        pasiva="Ignora la armadura enemiga";
     }
 
     @Override
     public Grupo atacar(Grupo enemigo, boolean critico, int fuerza) {
         if(critico)
-        enemigo.impacto((getDanio()+fuerza),(porcentajeDeArmaduraRobada*2));
+        enemigo.impacto((getPoder()+fuerza),(porcentajeDeArmaduraRobada*2));
         else
-        enemigo.impacto((getDanio()+fuerza),porcentajeDeArmaduraRobada);
+        enemigo.impacto((getPoder()+fuerza),porcentajeDeArmaduraRobada);
         return enemigo;
     }
     

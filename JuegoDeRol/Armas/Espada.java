@@ -11,6 +11,7 @@ public class Espada extends Arma {
         super(nombre, danio, coste);
         this.critico=critico;
         this.estocada=false;
+        pasiva="Probabilidad de estoque";
     }
 
     @Override
@@ -19,16 +20,16 @@ public class Espada extends Arma {
         estocada=r.nextBoolean();
         if(critico){
             if(estocada){
-                enemigo.impacto(getDanio()*2+fuerza);
+                enemigo.impacto(getPoder()*2+fuerza);
                 System.out.println("Estocada!");
             }else
-                enemigo.impacto(getDanio()+(getDanio()/3)+fuerza);
+                enemigo.impacto(getPoder()+(getPoder()/3)+fuerza);
         }else{
             if(estocada){
-                enemigo.impacto(getDanio()+(getDanio()/3)+fuerza);
+                enemigo.impacto(getPoder()+(getPoder()/3)+fuerza);
                 System.out.println("Estocada!");
             }else
-                enemigo.impacto(getDanio()+fuerza); 
+                enemigo.impacto(getPoder()+fuerza); 
         }
         return enemigo;
     }

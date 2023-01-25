@@ -2,15 +2,14 @@ package JuegoDeRol.Habilidades.HabilidadesAliados;
 
 import JuegoDeRol.Grupos.Grupo;
 import JuegoDeRol.Grupos.Enemigos.Enemigo;
-import JuegoDeRol.Habilidades.HabilidadOfensiva;
 
-public class HechizoDeFuego extends HabilidadOfensiva{
+public class HechizoDeFuego extends HechizoElemental{
 
-    final static String naturaleza="Fuego";
   
 
     public HechizoDeFuego(String nombre, int danio, int coste) {
         super(nombre, danio, coste);
+        naturaleza="Fuego";
     }
     
     public Grupo ejecutar(Grupo personaje, boolean critico, int mana){
@@ -31,4 +30,6 @@ public class HechizoDeFuego extends HabilidadOfensiva{
         }
         return personaje;
     }
+
+
 }

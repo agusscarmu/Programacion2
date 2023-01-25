@@ -1,6 +1,8 @@
 package JuegoDeRol;
 
 
+import java.util.ArrayList;
+
 import JuegoDeRol.Armas.Arco;
 import JuegoDeRol.Armas.Arma;
 import JuegoDeRol.Armas.ArmaDual;
@@ -37,8 +39,21 @@ public class Menu {
 
         Grupo grupoAliado = new EquipoAliado();
 
+        ArrayList<ElementosUtilizables> arsenal = new ArrayList<>();
+        arsenal.add(espada);
+        arsenal.add(martillo);
+        arsenal.add(lanza);
+        arsenal.add(daga);
+        arsenal.add(arco);
+        arsenal.add(guadania);
+        arsenal.add(espadasDuales);
+
         Habilidad bolaDeFuego = new HechizoDeFuego("Bola de fuego", 30, 15);
         Habilidad auraCurativa = new HechizoCurativo("Aura curativa", 70, 50);
+
+        ArrayList<ElementosUtilizables> conjuros = new ArrayList<>();
+        conjuros.add(bolaDeFuego);
+        conjuros.add(auraCurativa);
 
         Personaje jugador = new Jugador("iSpectroh", 100, 20,54400440,7000, 10, arco, bolaDeFuego,10);
         Personaje aliado1 = new Jugador("Tina", 100, 10,400, 300, 80, guadania, bolaDeFuego, 20);
@@ -70,7 +85,7 @@ public class Menu {
         sala3.agregarIntegrante((Enemigo)troll6);
         sala3.agregarIntegrante((Enemigo)troll7);
 
-        Juego juego = new Juego(mazmorra, grupoAliado);
+        Juego juego = new Juego(mazmorra, grupoAliado, arsenal, conjuros);
         
         ((Mazmorra)mazmorra).ordenarSalas();
         juego.jugar();

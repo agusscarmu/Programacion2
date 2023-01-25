@@ -1,30 +1,25 @@
 package JuegoDeRol.Armas;
 
+import JuegoDeRol.ElementosUtilizables;
 import JuegoDeRol.Grupos.Grupo;
 
-public abstract class Arma{
+public abstract class Arma extends ElementosUtilizables{
     private String nombre;
     private int danio;
     private int coste;
     protected int critico; 
     protected int daniorealizado;
+    protected String pasiva;
 
     public Arma(String nombre, int danio, int coste) {
-        this.nombre=nombre;
-        this.danio=danio;
-        this.coste = coste;
-    }
-    public String getNombre(){
-        return nombre;
-    }
-    public int getDanio(){
-        return danio;
-    }
-    public int getCoste(){
-        return coste;
+        super(nombre, danio, coste);
     }
     public int getCritico(){
         return critico;
+    }
+    @Override
+    public String toString() {
+        return "Arma: "+getNombre()+", Danio: "+getPoder()+", Coste: "+getCoste()+", Pasiva: "+pasiva;
     }
     public abstract Grupo atacar(Grupo grupo, boolean critico, int fuerza);
 }

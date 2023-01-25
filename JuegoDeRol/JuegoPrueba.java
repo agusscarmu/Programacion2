@@ -12,7 +12,7 @@ import JuegoDeRol.Grupos.Enemigos.Enemigo;
 import JuegoDeRol.Habilidades.Habilidad;
 
 
-public class Juego {
+public class JuegoPrueba {
     Grupo aliados;
     Grupo enemigos;
     BufferedReader entrada;
@@ -23,7 +23,7 @@ public class Juego {
     final static int NroDeAcciones=4;
     final static int NroDeAccionesInteractivas=2;
 
-    public Juego(Grupo enemigos, Grupo aliados, ArrayList<ElementosUtilizables> arsenal, ArrayList<ElementosUtilizables> conjuros){
+    public JuegoPrueba(Grupo enemigos, Grupo aliados, ArrayList<ElementosUtilizables> arsenal, ArrayList<ElementosUtilizables> conjuros){
         this.entrada = new BufferedReader(new InputStreamReader(System.in));
         this.enemigos=enemigos;
         this.aliados=aliados;
@@ -86,89 +86,57 @@ public class Juego {
                     }
                     System.out.println("\nTurno de: "+((Jugador)aliado).getNombre());
                     while(accion<1){
-                        System.out.println("1 Para atacar con: "+((Jugador)aliado).getArma().getNombre()+"\n2 Para tirar hechizo: "+((Jugador)aliado).getHechizo().getNombre()
-                            +"\n3 Para cambiar de arma\n4 Para cambiar de hechizo");
-                        accion = new Integer(entrada.readLine());
-                        if(accion>NroDeAcciones){
-                            accion=0;
-                            System.out.println("Ingresa un valor entre las opciones disponibles.");
-                        }
-                        if(objetivo>(enemigo.size()-1)){
-                            System.out.println("Elija entre los objetivos presentes.");
-                        }
-                            switch (accion) {
-                                case 1:
-                                    while(turnoJugador){
-                                        atacar(enemigo, esCritico, aliado, accion);
-                                        turnoJugador=false;
-                                        break;
-                                        }
-                                        break;
-                                case 2:
-                                    if(((Jugador)aliado).getHechizo().esOfensivo()){
-                                        while(turnoJugador){
-                                            atacar(enemigo, esCritico, aliado, accion);
-                                            turnoJugador=false;
-                                            break;
-                                            }
-                                            break;
-                                    }else{
-                                        while(turnoJugador){
-                                            curacion(aliado,objetivo);
-                                            turnoJugador=false;
-                                            break;
-                                        }
-                                        break;
-                                    }
-                                case 3:
-                                    equipar(aliado,arsenal,accion);
-                                    accion=0;
-                                    break;
-                                case 4:
-                                    equipar(aliado,conjuros,accion);
-                                    accion=0;
-                                    break;
-                            }
-                        }
-                    }
+                System.out.println("1 Para atacar con: "+((Jugador)aliado).getArma().getNombre()+"\n2 Para tirar hechizo: "+((Jugador)aliado).getHechizo().getNombre()
+                    +"\n3 Para cambiar de arma\n4 Para cambiar de hechizo");
+                accion = new Integer(entrada.readLine());
+                if(accion>2 && accion<=NroDeAcciones){
+                    cambio(aliado, accion);
                 }
+                if(accion>NroDeAcciones){
+                    accion=0;
+                    System.out.println("Ingresa un valor entre las opciones disponibles.");
+                }
+                if(accion<=NroDeAccionesInteractivas){
+                if(accion==2 && (!((Jugador)aliado).getHechizo().esOfensivo())){
+                    curacion(aliado,objetivo);
+                    turnoJugador=false;
+                    break;
+                }
+               
+                if(!turnoJugador){break;}
+                System.out.println("A que objetivo desea atacar?");
+                objetivo = (new Integer(entrada.readLine()))-1;
+                if(objetivo>(enemigo.size()-1)){
+                    System.out.println("Elija entre los objetivos presentes.");
+                }else if(enemigo.get(objetivo).getVida()<0){
+                System.out.println("\nEl objetivo esta muerto, intenta otro objetivo");
+                }else{
+                    if(esCritico>0){
+                        System.out.println("CRITICO!");
+                        critico=true;
+                    }
+                    if(esCritico<0){
+                        System.out.println("Fallo Critico!");
+                        turnoJugador=false;
+                        break;
+                    }
+                    if(accion==1){
+                            ((Jugador)aliado).atacar(enemigo.get(objetivo),critico);
+                            turnoJugador=false;
+                        }else{
+                            ((Jugador)aliado).utilizarMagia(enemigo.get(objetivo),critico,((Jugador)aliado).getMana());
+                            turnoJugador=false;
+                        } 
+                        if(enemigo.get(objetivo).getVida()<0){
+                            System.out.println("\n"+enemigo.get(objetivo).getNombre()+" ha muerto");
+                        }}
+                    }
+                }} }
                              
             catch(Exception e){
                 System.out.println(e);
             }              
         }                           
-    }
-    public void atacar(ArrayList<Grupo>enemigo, int esCritico, Grupo aliado, int accion){
-        int objetivo;
-        boolean ataque=false;
-        boolean critico=false;
-        while(!ataque){
-            try{
-                System.out.println("A enemigo desea atacar?");
-                objetivo=new Integer(entrada.readLine())-1;
-            if(objetivo>enemigo.size()-1){
-                System.out.println("Elija un enemigo presente");
-            }else{
-                if(critico(aliado)>0){
-                    System.out.println("CRITICO!");
-                    critico=true;
-                }
-                if(critico(aliado)<0){
-                    System.out.println("Fallo Critico!");
-                    break;
-                }
-                if(accion==1){
-                    ((Jugador)aliado).atacar(enemigo.get(objetivo),critico);
-                    ataque=true;
-                }else{
-                    ((Jugador)aliado).utilizarMagia(enemigo.get(objetivo),critico,((Jugador)aliado).getMana());
-                    ataque=true;
-                }
-            }
-            }catch(Exception e){
-                System.out.println(e);
-            }
-        }
     }
     public void turnoEnemigo(Grupo enemigo){
         int objetivo = 0;
@@ -223,6 +191,14 @@ public class Juego {
             return 1;
         }else 
             return 0;
+    }
+    public void cambio(Grupo aliado, int accion){
+        if(accion==3){
+            equipar(aliado,arsenal,accion);
+        }else if(accion==4){
+            equipar(aliado,conjuros,accion);
+        }
+            
     }
     public boolean estadoPartida(ArrayList<Grupo>grupo){
         int conteo=0;

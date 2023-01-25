@@ -8,14 +8,15 @@ public class Daga extends Arma{
     public Daga(String nombre, int danio, int coste, int afilado) {
         super(nombre, danio, coste);
         critico=4;
+        pasiva="Potencia enormemente los criticos";
     }
 
     @Override
     public Grupo atacar(Grupo enemigo, boolean critico, int fuerza) {
         if(critico)
-        enemigo.impacto(getDanio()*5+fuerza/2);
+        enemigo.impacto(getPoder()*5+fuerza/2);
         else
-        enemigo.impacto(getDanio()+fuerza/2);
+        enemigo.impacto(getPoder()+fuerza/2);
         return null;
     }
 
