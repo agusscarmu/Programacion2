@@ -19,4 +19,10 @@ public class Grito extends HabilidadOfensiva{
         System.out.println("Te sangran los oidos");
         return personaje;
     }
+
+    @Override
+    public Grupo ejecutar(Grupo personaje, boolean critico, int fuerza, Grupo jugador) {
+        // TODO Auto-generated method stub
+        return null;
+    }
 }

@@ -20,5 +20,11 @@ public class Pisada extends HabilidadOfensiva{
         }
         return personaje;
     }
+
+    @Override
+    public Grupo ejecutar(Grupo personaje, boolean critico, int fuerza, Grupo jugador) {
+        // TODO Auto-generated method stub
+        return null;
+    }
     
 }

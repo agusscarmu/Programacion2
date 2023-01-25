@@ -8,6 +8,7 @@ import java.util.Random;
 import JuegoDeRol.Grupos.Grupo;
 import JuegoDeRol.Grupos.Aliados.Jugador;
 import JuegoDeRol.Grupos.Enemigos.Enemigo;
+import JuegoDeRol.Pociones.Pocion;
 
 
 public class Juego {
@@ -58,7 +59,9 @@ public class Juego {
         System.out.println("\nPerdiste en la sala "+sala);
         break;
         }
-
+        for(ElementosUtilizables pocion:pociones){
+            ((Pocion)pocion).cargarUsos();
+        }
         sala++;
         }
         
@@ -76,6 +79,7 @@ public class Juego {
             }    
             try{
                 boolean turnoJugador = true;
+                boolean pocionUsada=false;
                 boolean critico = false;
                 int objetivo = 0;
                 while(turnoJugador){
@@ -118,15 +122,17 @@ public class Juego {
                                         break;
                                     }
                                 case 3:
-                                    while(turnoJugador){
-                                        if(usarPocion(aliado)){
-                                        turnoJugador=false;
-                                        break;
-                                        }
-                                        else
+                                    if(!pocionUsada){
+                                    if(usarPocion(aliado)){
+                                        pocionUsada=true;
                                         break;
                                     }
+                                    else
                                     break;
+                                    }else
+                                        System.out.println("Ya usaste una pocion en este turno");                                       
+                                        break;
+                                    
                                 case 4:
                                     equipar(aliado,arsenal,accion);
                                     accion=0;
@@ -150,7 +156,7 @@ public class Juego {
         }                           
     }
     public boolean usarPocion(Grupo aliado){
-        if(((Jugador)aliado).getPocion().getUsos()<0){
+        if(((Jugador)aliado).getPocion().getUsos()<1){
             System.out.println("No tenes mas usos disponibles");
             return false;
         }else{
@@ -182,7 +188,6 @@ public class Juego {
                     ataque=true;
                 }else{
                     ((Jugador)aliado).utilizarMagia(enemigo.get(objetivo),critico,((Jugador)aliado).getManaMaximo());
-                    System.out.println(((Jugador)aliado).getManaMaximo());
                     ataque=true;
                 }
             }
@@ -198,15 +203,15 @@ public class Juego {
         boolean atacado=false;
         int esCritico=critico(e);
             if(e.getVida()>0){
-                if(esCritico>0){
-                    System.out.println("CRITICO DE "+((Enemigo)e).getNombre()+"!");
-                    critico=true;
-                }
-                if(esCritico<0){
-                    System.out.println("Fallo critico de "+((Enemigo)e).getNombre()+"!");
-                    break;
-                }
                 while(!atacado){
+                    if(esCritico>0){
+                        System.out.println("CRITICO DE "+((Enemigo)e).getNombre()+"!");
+                        critico=true;
+                    }
+                    if(esCritico<0){
+                        System.out.println("Fallo critico de "+((Enemigo)e).getNombre()+"!");
+                        break;
+                    }
                     objetivo=r.nextInt(aliados.getGrupo().size());
                     if(aliados.getGrupo().get(objetivo).getVida()>0){
                     ((Enemigo)e).atacar((aliados.getGrupo().get(objetivo)), critico);

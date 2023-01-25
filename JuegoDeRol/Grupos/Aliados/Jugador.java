@@ -50,6 +50,9 @@ public class Jugador extends Grupo{
     public Grupo utilizarMagia(Grupo personaje, boolean critico, int boost){
         if(getMana()>hechizo.getCoste()){
         System.out.println("Lanzo: "+hechizo.getNombre());
+        if(hechizo.autoCurativo())
+        hechizo.ejecutar(personaje,critico, boost, this);
+
         hechizo.ejecutar(personaje,critico, boost);
         gastoMana(hechizo.getCoste());
         return personaje;
