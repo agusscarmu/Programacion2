@@ -16,6 +16,7 @@ public class HechizoCurativo extends HabilidadDefensiva {
             personaje.curacion(getPoder()*2+vida);
         else
             personaje.curacion(getPoder()+vida);
+
         return personaje;
     }
     

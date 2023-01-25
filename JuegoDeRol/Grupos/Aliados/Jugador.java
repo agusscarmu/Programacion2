@@ -9,14 +9,12 @@ import JuegoDeRol.Habilidades.Habilidad;
 
 public class Jugador extends Grupo{
 
-    private int mana;
     private Arma arma;
     private Habilidad hechizo;
     private int critico;
 
     public Jugador(String nombre, int vida, int defensa, int mana, int estamina, int fuerza, Arma arma, Habilidad hechizo, int critico) {
-        super(nombre, vida, defensa,fuerza, estamina,critico);
-        this.mana=mana;
+        super(nombre, vida, defensa, mana,fuerza, estamina,critico);
         this.arma=arma;
         this.hechizo=hechizo;
     }
@@ -25,9 +23,6 @@ public class Jugador extends Grupo{
     }
     public Arma getArma(){
         return arma;
-    }
-    public int getMana(){
-        return mana;
     }
     public Habilidad getHechizo(){
         return hechizo;
@@ -44,10 +39,10 @@ public class Jugador extends Grupo{
         return personaje;
     }
     public Grupo utilizarMagia(Grupo personaje, boolean critico, int boost){
-        if(mana>hechizo.getCoste()){
+        if(getMana()>hechizo.getCoste()){
         System.out.println("Lanzo: "+hechizo.getNombre());
         hechizo.ejecutar(personaje,critico, boost);
-        mana-=hechizo.getCoste();
+        gastoMana(hechizo.getCoste());
         return personaje;
         }else
         System.out.println("Mana insuficiente!");

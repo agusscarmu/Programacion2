@@ -161,7 +161,8 @@ public class Juego {
                     ((Jugador)aliado).atacar(enemigo.get(objetivo),critico);
                     ataque=true;
                 }else{
-                    ((Jugador)aliado).utilizarMagia(enemigo.get(objetivo),critico,((Jugador)aliado).getMana());
+                    ((Jugador)aliado).utilizarMagia(enemigo.get(objetivo),critico,((Jugador)aliado).getManaMaximo());
+                    System.out.println(((Jugador)aliado).getManaMaximo());
                     ataque=true;
                 }
             }
@@ -174,6 +175,7 @@ public class Juego {
         int objetivo = 0;
         for(Grupo e:enemigo.getGrupo()){
         boolean critico=false;
+        boolean atacado=false;
         int esCritico=critico(e);
             if(e.getVida()>0){
                 if(esCritico>0){
@@ -184,8 +186,17 @@ public class Juego {
                     System.out.println("Fallo critico de "+((Enemigo)e).getNombre()+"!");
                     break;
                 }
-                objetivo=r.nextInt(aliados.getGrupo().size());
-                ((Enemigo)e).atacar(((Jugador)aliados.getGrupo().get(objetivo)), critico); 
+                while(!atacado){
+                    objetivo=r.nextInt(aliados.getGrupo().size());
+                    if(aliados.getGrupo().get(objetivo).getVida()>0){
+                    ((Enemigo)e).atacar((aliados.getGrupo().get(objetivo)), critico);
+                    atacado=true;
+                    } 
+                }
+                if(aliados.getGrupo().get(objetivo).getVida()<0){
+                    System.out.println(aliados.getGrupo().get(objetivo).getNombre()+" ha muerto!");
+                }
+
             }   
         }
     }
@@ -198,6 +209,8 @@ public class Juego {
                 objetivo=new Integer(entrada.readLine())-1;
             if(objetivo>aliados.getGrupo().size()-1){
                 System.out.println("Elija un aliado presente");
+            }else if(aliados.getGrupo().get(objetivo).getVida()<0){
+                System.out.println("El aliado esta muerto, elija a otro aliado para curar");
             }else{
                 if(critico(aliado)>0){
                     System.out.println("CRITICO!");
@@ -207,7 +220,7 @@ public class Juego {
                     System.out.println("Fallo Critico!");
                     break;
                 }
-                ((Jugador)aliado).utilizarMagia(aliados.getGrupo().get(objetivo),critico,((Jugador)aliado).getVida());
+                ((Jugador)aliado).utilizarMagia(aliados.getGrupo().get(objetivo),critico,((Jugador)aliado).getVidaMaxima());
                 curado=true;
             }
             }catch(Exception exc){

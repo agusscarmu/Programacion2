@@ -10,8 +10,22 @@ public abstract class Personaje{
     private int estamina;
     private int critico;
     private int defensa;
+    private int mana;
+    private int vidaMaxima;
+    private int manaMaximo;
 
     public Personaje(){}
+    public Personaje(String nombre, int vida, int defensa, int mana, int fuerza, int estamina,int critico){
+        this.nombre=nombre;
+        this.vida=vida;
+        this.defensa=defensa;
+        this.mana=mana;
+        this.fuerza=fuerza;
+        this.estamina=estamina;
+        this.critico=critico;
+        this.vidaMaxima=vida;
+        this.manaMaximo=mana;
+    }
     public Personaje(String nombre, int vida, int defensa,int fuerza, int estamina,int critico){
         this.nombre=nombre;
         this.vida=vida;
@@ -19,6 +33,7 @@ public abstract class Personaje{
         this.fuerza=fuerza;
         this.estamina=estamina;
         this.critico=critico;
+        this.vidaMaxima=vida;
     }
     public int getCritico(){
         return critico;
@@ -28,6 +43,18 @@ public abstract class Personaje{
     }
     public int getVida(){
         return vida;
+    }
+    public int getMana(){
+        return mana;
+    }
+    public int getManaMaximo(){
+        return manaMaximo;
+    }
+    public void gastoMana(int gasto){
+        mana= mana - gasto;
+    }
+    public int getVidaMaxima(){
+        return vidaMaxima;
     }
     public int getEstamina(){
         return estamina;
