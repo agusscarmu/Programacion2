@@ -14,12 +14,14 @@ import JuegoDeRol.Armas.Martillo;
 import JuegoDeRol.Grupos.Grupo;
 import JuegoDeRol.Grupos.Aliados.EquipoAliado;
 import JuegoDeRol.Grupos.Aliados.Jugador;
+import JuegoDeRol.Grupos.Enemigos.Duende;
 import JuegoDeRol.Grupos.Enemigos.Enemigo;
 import JuegoDeRol.Grupos.Enemigos.Mazmorra;
 import JuegoDeRol.Grupos.Enemigos.Troll;
 import JuegoDeRol.Habilidades.Habilidad;
 import JuegoDeRol.Habilidades.HabilidadesAliados.HechizoCurativo;
 import JuegoDeRol.Habilidades.HabilidadesAliados.HechizoDeFuego;
+import JuegoDeRol.Habilidades.HabilidadesAliados.HechizoDeHielo;
 import JuegoDeRol.Habilidades.HabilidadesAliados.HechizoDeSangre;
 import JuegoDeRol.Pociones.Pocion;
 import JuegoDeRol.Pociones.PocionDeMana;
@@ -42,10 +44,17 @@ public class Menu {
         pociones.add(pocionDeVida);
         pociones.add(pocionDeMana);
 
-        Grupo mazmorra = new Mazmorra();
-        Grupo sala1 = new Mazmorra();
-        Grupo sala2 = new Mazmorra();
-        Grupo sala3 = new Mazmorra();
+        Grupo mazmorras = new Mazmorra();
+
+        Grupo mazmorraTroll = new Mazmorra("Cueva de Trolls");
+        Grupo trollSala1 = new Mazmorra();
+        Grupo trollSala2 = new Mazmorra();
+        Grupo trollSala3 = new Mazmorra();
+
+        Grupo mazmorraDuende = new Mazmorra("Bosque de duendes");
+        Grupo duendeSala1 = new Mazmorra();
+        Grupo duendeSala2 = new Mazmorra();
+        Grupo duendeSala3 = new Mazmorra();
 
         Grupo grupoAliado = new EquipoAliado();
 
@@ -61,45 +70,68 @@ public class Menu {
         Habilidad bolaDeFuego = new HechizoDeFuego("Bola de fuego", 30, 15);
         Habilidad auraCurativa = new HechizoCurativo("Aura curativa", 70, 50);
         Habilidad hechizoDeSangre = new HechizoDeSangre("Ruptura sangrienta", 40, 40);
+        Habilidad hechizoDeHielo = new HechizoDeHielo("Aliento gelido", 35, 40);
 
         ArrayList<ElementosUtilizables> conjuros = new ArrayList<>();
         conjuros.add(bolaDeFuego);
         conjuros.add(hechizoDeSangre);
         conjuros.add(auraCurativa);
+        conjuros.add(hechizoDeHielo);
 
-        Personaje jugador = new Jugador("iSpectroh", 100, 20,54400440,7000, 10, arco, bolaDeFuego, pocionDeVida,10);
-        Personaje aliado1 = new Jugador("Tina", 100, 10,400, 300, 80, guadania, bolaDeFuego, pocionDeVida, 20);
-        Personaje aliado2 = new Jugador("Terah", 100, 40,200, 300, 20, martillo, auraCurativa, pocionDeMana, 0);
-        Personaje aliado3 = new Jugador("Escaldaron", 100, 5,600, 300, 80, daga, bolaDeFuego, pocionDeMana,10);
+        Personaje jugador = new Jugador("iSpectroh", 100, 20,100,7000, 10, arco, hechizoDeHielo, pocionDeVida,10);
+        Personaje aliado1 = new Jugador("Tina", 100, 10,100, 300, 80, guadania, bolaDeFuego, pocionDeVida, 20);
+        Personaje aliado2 = new Jugador("Terah", 100, 40,100, 300, 20, martillo, auraCurativa, pocionDeMana, 0);
+        Personaje aliado3 = new Jugador("Escaldaron", 100, 5,100, 300, 80, daga, bolaDeFuego, pocionDeMana,10);
 
-        Personaje troll1 = new Troll("Gadunta", 300, 10, 40, 80, "Fuego",0); 
-        Personaje troll2 = new Troll("Gorfo", 340, 10, 43, 82, "Hielo",0); 
-        Personaje troll3 = new Troll("Fordo", 240, 10, 205, 50, "Rayo",0); 
-        Personaje troll4 = new Troll("Menasko", 100, 10, 200, 40, "Fuego",0); 
-        Personaje troll5 = new Troll("Gyono", 200, 10, 30, 80, "Agua",0); 
-        Personaje troll6 = new Troll("Poro", 300, 10, 80, 90, "Fuego",0); 
-        Personaje troll7 = new Troll("Fualta", 400, 10, 740, 100, "Oscuridad",2); 
+        Personaje trollJoven = new Troll("Troll joven", 200, 10, 45, 80,0); 
+        Personaje trollAdulto = new Troll("Troll adulto", 340, 15, 60, 82,0); 
+        Personaje trollAnciano = new Troll("Troll anciano", 400, 10, 80, 30,0); 
+        Personaje trollJefe = new Troll("Jefe troll", 1000, 15, 85, 100,1); 
+
+        Personaje duendeSalvaje = new Duende("Duende salvaje", 130, 8, 30, 80,2); 
+        Personaje duendeChaman = new Duende("Duende chaman", 150, 6, 40, 82,1); 
+        Personaje duendeJefe = new Duende("Jefe duende", 200, 10, 60, 30,2); 
+        Personaje duendeJoven = new Duende("Duende joven", 80, 5, 25, 100,0); 
+
 
         grupoAliado.agregarIntegrante(((Grupo)jugador));
         grupoAliado.agregarIntegrante(((Grupo)aliado1));
         grupoAliado.agregarIntegrante(((Grupo)aliado2));
         grupoAliado.agregarIntegrante(((Grupo)aliado3));
 
-        mazmorra.agregarIntegrante((Grupo)sala1);
-        mazmorra.agregarIntegrante((Grupo)sala2);
-        mazmorra.agregarIntegrante((Grupo)sala3);
+        mazmorras.agregarIntegrante(mazmorraTroll);
+        mazmorras.agregarIntegrante(mazmorraDuende);
 
-        sala1.agregarIntegrante((Enemigo)troll1);
-        sala1.agregarIntegrante((Enemigo)troll2);
-        sala2.agregarIntegrante((Enemigo)troll3);
-        sala2.agregarIntegrante((Enemigo)troll4);
-        sala3.agregarIntegrante((Enemigo)troll5);
-        sala3.agregarIntegrante((Enemigo)troll6);
-        sala3.agregarIntegrante((Enemigo)troll7);
+        mazmorraDuende.agregarIntegrante((Grupo)duendeSala1);
+        mazmorraDuende.agregarIntegrante((Grupo)duendeSala2);
+        mazmorraDuende.agregarIntegrante((Grupo)duendeSala3);
 
-        Juego juego = new Juego(mazmorra, grupoAliado, arsenal, conjuros, pociones);
+        duendeSala1.agregarIntegrante((Enemigo)duendeChaman);
+        duendeSala1.agregarIntegrante((Enemigo)duendeSalvaje);
+        duendeSala2.agregarIntegrante((Enemigo)duendeJefe);
+        duendeSala2.agregarIntegrante((Enemigo)trollJoven);
+        duendeSala3.agregarIntegrante((Enemigo)duendeJoven);
+        duendeSala3.agregarIntegrante((Enemigo)duendeSalvaje);
+
+        mazmorraTroll.agregarIntegrante((Grupo)trollSala1);
+        mazmorraTroll.agregarIntegrante((Grupo)trollSala2);
+        mazmorraTroll.agregarIntegrante((Grupo)trollSala3);
+
+        trollSala1.agregarIntegrante((Enemigo)trollJoven);
+        trollSala1.agregarIntegrante((Enemigo)trollJoven);
+        trollSala2.agregarIntegrante((Enemigo)trollAnciano);
+        trollSala2.agregarIntegrante((Enemigo)trollJefe);
+        trollSala2.agregarIntegrante((Enemigo)trollAnciano);
+        trollSala3.agregarIntegrante((Enemigo)trollJoven);
+        trollSala3.agregarIntegrante((Enemigo)trollAnciano);
+        trollSala3.agregarIntegrante((Enemigo)trollAdulto);
+
+        Juego juego = new Juego(mazmorras, grupoAliado, arsenal, conjuros, pociones);
         
-        ((Mazmorra)mazmorra).ordenarSalas();
+        ((Mazmorra)mazmorras).ordenarSalas();
+        // ((Mazmorra)mazmorraDuende).ordenarSalas();
+        // ((Mazmorra)mazmorraTroll).ordenarSalas();
+
         juego.jugar();
         
         

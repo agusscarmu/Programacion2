@@ -21,6 +21,7 @@ public class Jugador extends Grupo{
         this.pocion=pocion;
         this.hechizo=hechizo;
     }
+
     public int getCritico(){
         return critico+arma.getCritico();
     }
@@ -47,13 +48,13 @@ public class Jugador extends Grupo{
         System.out.println("Estamina baja!");
         return personaje;
     }
-    public Grupo utilizarMagia(Grupo personaje, boolean critico, int boost){
+    public Grupo utilizarMagia(Grupo personaje, boolean critico){
         if(getMana()>hechizo.getCoste()){
         System.out.println("Lanzo: "+hechizo.getNombre());
         if(hechizo.autoCurativo())
-        hechizo.ejecutar(personaje,critico, boost, this);
+        hechizo.ejecutar(personaje,critico, (getVidaMaxima()/2), this);
 
-        hechizo.ejecutar(personaje,critico, boost);
+        hechizo.ejecutar(personaje,critico, (getManaMaximo()/3));
         gastoMana(hechizo.getCoste());
         return personaje;
         }else
@@ -70,9 +71,6 @@ public class Jugador extends Grupo{
         pocion=(Pocion)newPocion;
     }
     @Override
-    public void agregarIntegrante(Grupo enemigo) {
-    }
-    @Override
     public int verPoderDeAtaque() {
         return getFuerza();
     }
@@ -87,6 +85,11 @@ public class Jugador extends Grupo{
     @Override
     public void setRecuperacion(int recuperacion) {
         recuperacion(recuperacion);
+    }
+    @Override
+    public void agregarIntegrante(Grupo enemigo) {
+        // TODO Auto-generated method stub
+        
     }
 
 }

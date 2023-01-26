@@ -35,8 +35,11 @@ public class Juego {
     }
 
     public void jugar(){
-        int sala=1;
-        for(Grupo enemigo: enemigos.getGrupo()){
+        int nroMazmorra=1;
+        for(Grupo mazmorra: enemigos.getGrupo()){
+            int sala=1;
+            System.out.println("\nMazmorra: "+nroMazmorra+": "+mazmorra.getNombre());
+            for(Grupo enemigo: mazmorra.getGrupo()){
             System.out.println("\nSala: "+sala);
         while(!estadoPartida(aliados.getGrupo()) && !estadoPartida(enemigo.getGrupo())){ 
             System.out.println("\n");       
@@ -64,7 +67,8 @@ public class Juego {
         }
         sala++;
         }
-        
+    }
+    nroMazmorra++;
     }
 
     public void turnoAliado(ArrayList<Grupo> enemigo){
@@ -174,6 +178,8 @@ public class Juego {
                 objetivo=new Integer(entrada.readLine())-1;
             if(objetivo>enemigo.size()-1){
                 System.out.println("Elija un enemigo presente");
+            }else if(enemigo.get(objetivo).getVida()<0){
+                System.out.println("Elija un objetivo vivo");
             }else{
                 if(critico(aliado)>0){
                     System.out.println("CRITICO!");
@@ -187,42 +193,54 @@ public class Juego {
                     ((Jugador)aliado).atacar(enemigo.get(objetivo),critico);
                     ataque=true;
                 }else{
-                    ((Jugador)aliado).utilizarMagia(enemigo.get(objetivo),critico,((Jugador)aliado).getManaMaximo());
+                    ((Jugador)aliado).utilizarMagia(enemigo.get(objetivo),critico);
                     ataque=true;
                 }
+                if(enemigo.get(objetivo).getVida()<0){
+                    System.out.println(enemigo.get(objetivo).getNombre()+" ha muerto");
+                }
             }
-            }catch(Exception e){
-                System.out.println(e);
-            }
+        }catch(Exception e){
+            System.out.println(e);
+        }
         }
     }
     public void turnoEnemigo(Grupo enemigo){
         int objetivo = 0;
         for(Grupo e:enemigo.getGrupo()){
-        boolean critico=false;
-        boolean atacado=false;
-        int esCritico=critico(e);
-            if(e.getVida()>0){
-                while(!atacado){
-                    if(esCritico>0){
-                        System.out.println("CRITICO DE "+((Enemigo)e).getNombre()+"!");
-                        critico=true;
-                    }
-                    if(esCritico<0){
-                        System.out.println("Fallo critico de "+((Enemigo)e).getNombre()+"!");
-                        break;
-                    }
-                    objetivo=r.nextInt(aliados.getGrupo().size());
-                    if(aliados.getGrupo().get(objetivo).getVida()>0){
-                    ((Enemigo)e).atacar((aliados.getGrupo().get(objetivo)), critico);
-                    atacado=true;
-                    } 
+            if(!(e.getDebuffs().contains("Congelado"))){
+                if(e.getbuffs().contains("Descongelado")){
+                    e.quitarBuff("Descongelado");
                 }
-                if(aliados.getGrupo().get(objetivo).getVida()<0){
-                    System.out.println(aliados.getGrupo().get(objetivo).getNombre()+" ha muerto!");
-                }
-
-            }   
+                boolean critico=false;
+                boolean atacado=false;
+                int esCritico=critico(e);
+                if(e.getVida()>0){
+                    while(!atacado){
+                        if(esCritico>0){
+                            System.out.println("CRITICO DE "+((Enemigo)e).getNombre()+"!");
+                            critico=true;
+                        }
+                        if(esCritico<0){
+                            System.out.println("Fallo critico de "+((Enemigo)e).getNombre()+"!");
+                            break;
+                        }
+                        objetivo=r.nextInt(aliados.getGrupo().size());
+                        if(aliados.getGrupo().get(objetivo).getVida()>0){
+                        ((Enemigo)e).atacar((aliados.getGrupo().get(objetivo)), critico);
+                        atacado=true;
+                        } 
+                    }
+                    if(aliados.getGrupo().get(objetivo).getVida()<0){
+                        System.out.println(aliados.getGrupo().get(objetivo).getNombre()+" ha muerto!");
+                    }
+                
+                }  
+            }else{
+                System.out.println(e.getNombre()+" esta congelado!, pierde el turno");
+                e.quitarDebuff("Congelado");
+                e.buff("Descongelado");
+            } 
         }
     }
     public void curacion(Grupo aliado,int objetivo){
@@ -245,7 +263,7 @@ public class Juego {
                     System.out.println("Fallo Critico!");
                     break;
                 }
-                ((Jugador)aliado).utilizarMagia(aliados.getGrupo().get(objetivo),critico,((Jugador)aliado).getVidaMaxima());
+                ((Jugador)aliado).utilizarMagia(aliados.getGrupo().get(objetivo),critico);
                 curado=true;
             }
             }catch(Exception exc){

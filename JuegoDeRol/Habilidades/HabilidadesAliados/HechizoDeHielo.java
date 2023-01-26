@@ -3,28 +3,31 @@ package JuegoDeRol.Habilidades.HabilidadesAliados;
 import JuegoDeRol.Grupos.Grupo;
 import JuegoDeRol.Grupos.Enemigos.Enemigo;
 
-public class HechizoDeFuego extends HechizoElemental{
+public class HechizoDeHielo extends HechizoElemental {
 
-  
-
-    public HechizoDeFuego(String nombre, int danio, int coste) {
-        super(nombre, danio, coste);
-        naturaleza="Fuego";
+    public HechizoDeHielo(String nombre, int poder, int coste) {
+        super(nombre, poder, coste);
+        naturaleza="Hielo";
     }
-    
-    public Grupo ejecutar(Grupo personaje, boolean critico, int mana){
+
+    @Override
+    public Grupo ejecutar(Grupo personaje, boolean critico, int mana) {
         int impacto;
         if(critico){
-            impacto=getPoder()+(getPoder()*30/100)+mana;
+            impacto=getPoder()+(mana/2)+mana;
         }else{
-            impacto=getPoder()+(getPoder()*20/100)+mana; 
+            impacto=getPoder()+mana; 
         }
         if(((Enemigo)personaje).getDebilidad().equals(naturaleza)){
             personaje.impacto(impacto,danioElemental);
         }else{
             personaje.impacto(impacto);
         }
-        
+        if(!(personaje.getbuffs().contains("Descongelado"))){
+        personaje.debuff("Congelado");
+        }else{
+            System.out.println("No se pudo congelar en este turno");
+        }
         return personaje;
     }
 
@@ -33,7 +36,5 @@ public class HechizoDeFuego extends HechizoElemental{
         // TODO Auto-generated method stub
         return null;
     }
-
-
-
+    
 }

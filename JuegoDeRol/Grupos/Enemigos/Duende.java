@@ -2,32 +2,23 @@ package JuegoDeRol.Grupos.Enemigos;
 
 import java.util.ArrayList;
 
-import JuegoDeRol.Dado;
 import JuegoDeRol.Grupos.Grupo;
 import JuegoDeRol.Habilidades.Habilidad;
-import JuegoDeRol.Habilidades.HabilidadesEnemigos.Grito;
 import JuegoDeRol.Habilidades.HabilidadesEnemigos.impactoSimple;
 
-public class Troll extends Enemigo{
+public class Duende extends Enemigo{
     protected Habilidad habilidad1;
-    protected Habilidad habilidad2;
+    protected Habilidad habilidad;
 
-    public Troll(String nombre, int vida, int defensa, int fuerza, int estamina, int critico) {
+    public Duende(String nombre, int vida, int defensa, int fuerza, int estamina, int critico) {
         super(nombre, vida, defensa, fuerza, estamina,critico);
-        habilidad1=new Grito("Grito de furia", 10, 10);
-        habilidad2=new impactoSimple("Pisoton", 15, 20);
-        debilidad="Fuego";
+        habilidad1=new impactoSimple("Mordida", 15, 20);
+        debilidad="Hielo";
     }
 
     @Override
     public Grupo atacar(Grupo personaje, boolean critico) {
-        Dado dado = new Dado();
-        if(dado.tirarDado(0)>4){
-            return habilidad(habilidad1, personaje, critico);
-        }else{
-            System.out.println("Fuiste pisado!");
-            return habilidad(habilidad2,personaje,critico);
-        }
+        return habilidad(habilidad1, personaje, critico);
     }
     public int verPoderDeAtaque(){
         return getFuerza();

@@ -23,10 +23,10 @@ public class HechizoDeSangre extends HechizoElemental{
             jugador.curacion(impacto*15/100);
             System.out.println("Autocuracion por sangre de "+impacto*30/100);
         }
-        if(((Enemigo)personaje).getDebilidad().equals(naturaleza))
+        if(((Enemigo)personaje).getDebilidad().equals(naturaleza)){
         personaje.impacto(impacto, danioElemental);
-
-        personaje.impacto(impacto);
+        }else{
+        personaje.impacto(impacto);}
         return personaje;
     }
 

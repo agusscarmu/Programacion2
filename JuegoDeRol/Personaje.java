@@ -1,5 +1,7 @@
 package JuegoDeRol;
 
+import java.util.ArrayList;
+
 import JuegoDeRol.Grupos.Grupo;
 
 public abstract class Personaje{
@@ -13,7 +15,10 @@ public abstract class Personaje{
     private int mana;
     private int vidaMaxima;
     private int manaMaximo;
-    
+    private ArrayList<String>debuffs;
+    private ArrayList<String>buffs;
+
+
 
     public Personaje(){}
     public Personaje(String nombre, int vida, int defensa, int mana, int fuerza, int estamina,int critico){
@@ -26,6 +31,9 @@ public abstract class Personaje{
         this.critico=critico;
         this.vidaMaxima=vida;
         this.manaMaximo=mana;
+        this.debuffs=new ArrayList<>();
+        this.buffs=new ArrayList<>();
+
     }
     public Personaje(String nombre, int vida, int defensa,int fuerza, int estamina,int critico){
         this.nombre=nombre;
@@ -35,6 +43,29 @@ public abstract class Personaje{
         this.estamina=estamina;
         this.critico=critico;
         this.vidaMaxima=vida;
+        this.debuffs=new ArrayList<>();
+    }
+    public void debuff(String debuff){
+        debuffs.add(debuff);
+    }
+    public void buff(String debuff){
+        debuffs.add(debuff);
+    }
+    public ArrayList<String> getbuffs(){
+        return debuffs;
+    }
+    public ArrayList<String> getDebuffs(){
+        return debuffs;
+    }
+    public void quitarBuff(String debuff){
+        if(debuffs.contains(debuff)){
+            debuffs.remove(debuff);
+        }
+    }
+    public void quitarDebuff(String debuff){
+        if(debuffs.contains(debuff)){
+            debuffs.remove(debuff);
+        }
     }
     public int getCritico(){
         return critico;
@@ -84,7 +115,7 @@ public abstract class Personaje{
     public void curacion(int cura){
         vida+=cura;
     }
-    public void buff(int buff){
+    public void buffFuerza(int buff){
         fuerza+=buff;
     }
     public abstract Grupo atacar(Grupo personaje, boolean critico);

@@ -3,11 +3,11 @@ package JuegoDeRol.Grupos.Enemigos;
 import JuegoDeRol.Grupos.Grupo;
 
 public abstract class Enemigo extends Grupo{
-    private String debilidad;
+    protected String debilidad;
 
-    public Enemigo(String nombre, int vida, int defensa,int fuerza, int estamina, String debilidad, int critico) {
+    public Enemigo(String nombre, int vida, int defensa,int fuerza, int estamina, int critico) {
         super(nombre, vida, defensa,fuerza, estamina,critico);
-        this.debilidad=debilidad;
+        this.debilidad="";
 
     }
     @Override

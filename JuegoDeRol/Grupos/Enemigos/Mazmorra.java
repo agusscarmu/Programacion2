@@ -8,10 +8,20 @@ import JuegoDeRol.Grupos.Grupo;
 public class Mazmorra extends Grupo{
     private ArrayList<Grupo> grupoDeEnemigos;
     private SalasOrdenadas salaOrdenada;
+    private String nombre;
 
+    public Mazmorra(String nombre){
+        this.grupoDeEnemigos=new ArrayList<>();
+        this.salaOrdenada=new SalasOrdenadas();
+        this.nombre=nombre;
+    }
     public Mazmorra(){
         this.grupoDeEnemigos=new ArrayList<>();
         this.salaOrdenada=new SalasOrdenadas();
+    }
+
+    public String getNombre(){
+        return nombre;
     }
     @Override
     public int verPoderDeAtaque(){
@@ -32,7 +42,7 @@ public class Mazmorra extends Grupo{
         return vida;
     }
     public void ordenarSalas(){
-        Collections.sort(grupoDeEnemigos, salaOrdenada);;
+        Collections.sort(grupoDeEnemigos, salaOrdenada);
     }
     @Override
     public void agregarIntegrante(Grupo enemigo) {
