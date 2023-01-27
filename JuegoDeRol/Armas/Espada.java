@@ -3,6 +3,7 @@ package JuegoDeRol.Armas;
 import java.util.Random;
 
 import JuegoDeRol.Grupos.Grupo;
+import JuegoDeRol.Grupos.Enemigos.Enemigo;
 
 public class Espada extends Arma {
 
@@ -15,7 +16,7 @@ public class Espada extends Arma {
     }
 
     @Override
-    public Grupo atacar(Grupo enemigo, boolean critico, int fuerza) {
+    public Grupo atacar(Enemigo enemigo, boolean critico, int fuerza) {
         Random r = new Random();
         estocada=r.nextBoolean();
         if(critico){

@@ -1,6 +1,7 @@
 package JuegoDeRol.Habilidades.HabilidadesEnemigos;
 
 import JuegoDeRol.Grupos.Grupo;
+import JuegoDeRol.Grupos.Aliados.Jugador;
 import JuegoDeRol.Habilidades.HabilidadOfensiva;
 
 public class impactoSimple extends HabilidadOfensiva{
@@ -12,10 +13,10 @@ public class impactoSimple extends HabilidadOfensiva{
     @Override
     public Grupo ejecutar(Grupo personaje, boolean critico, int fuerza) {
         if(critico){
-        personaje.impacto(getPoder()*2+fuerza);
+            ((Jugador)personaje).impacto(getPoder()*2+fuerza);
         System.out.println("Vida: -"+getPoder()*2);
         }else{
-        personaje.impacto(getPoder()+fuerza);
+            ((Jugador)personaje).impacto(getPoder()+fuerza);
         System.out.println("Vida: -"+getPoder());
         }
         return personaje;

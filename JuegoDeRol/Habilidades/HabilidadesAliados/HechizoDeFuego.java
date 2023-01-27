@@ -20,9 +20,9 @@ public class HechizoDeFuego extends HechizoElemental{
             impacto=getPoder()+(getPoder()*20/100)+mana; 
         }
         if(((Enemigo)personaje).getDebilidad().equals(naturaleza)){
-            personaje.impacto(impacto,danioElemental);
+            ((Enemigo)personaje).impacto(impacto,danioElemental);
         }else{
-            personaje.impacto(impacto);
+            ((Enemigo)personaje).impacto(impacto);
         }
         
         return personaje;

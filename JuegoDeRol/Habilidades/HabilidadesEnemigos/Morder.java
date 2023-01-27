@@ -1,6 +1,7 @@
 package JuegoDeRol.Habilidades.HabilidadesEnemigos;
 
 import JuegoDeRol.Grupos.Grupo;
+import JuegoDeRol.Grupos.Aliados.Jugador;
 import JuegoDeRol.Habilidades.HabilidadOfensiva;
 
 public class Morder extends HabilidadOfensiva{
@@ -22,10 +23,10 @@ public class Morder extends HabilidadOfensiva{
     @Override
     public Grupo ejecutar(Grupo personaje, boolean critico, int fuerza) {
         if(critico){
-            personaje.impacto(getPoder()*2+fuerza);
+            ((Jugador)personaje).impacto(getPoder()*2+fuerza);
             System.out.println("Fuiste mordido, vida: -"+getPoder()*2+fuerza);
         }else{
-            personaje.impacto(getPoder()+fuerza);
+            ((Jugador)personaje).impacto(getPoder()+fuerza);
             System.out.println("Fuiste mordido, vida: -"+getPoder()+fuerza);
         }
             return personaje;

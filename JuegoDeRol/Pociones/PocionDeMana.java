@@ -1,6 +1,7 @@
 package JuegoDeRol.Pociones;
 
 import JuegoDeRol.Personaje;
+import JuegoDeRol.Grupos.Aliados.Jugador;
 
 public class PocionDeMana extends Pocion{
 
@@ -10,7 +11,7 @@ public class PocionDeMana extends Pocion{
 
     @Override
     public void usar(Personaje personaje) {
-        personaje.recuperarMana(getPoder());
+        ((Jugador)personaje).recuperarMana(getPoder());
         uso();
     }
     

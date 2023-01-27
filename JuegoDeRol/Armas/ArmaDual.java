@@ -1,6 +1,7 @@
 package JuegoDeRol.Armas;
 
 import JuegoDeRol.Grupos.Grupo;
+import JuegoDeRol.Grupos.Enemigos.Enemigo;
 
 public class ArmaDual extends Arma{
 
@@ -11,7 +12,7 @@ public class ArmaDual extends Arma{
     }
 
     @Override
-    public Grupo atacar(Grupo enemigo, boolean critico, int fuerza) {
+    public Grupo atacar(Enemigo enemigo, boolean critico, int fuerza) {
         if(critico)
         enemigo.impacto(getPoder()*2+fuerza);
         else

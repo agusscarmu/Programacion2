@@ -44,11 +44,11 @@ public class Juego {
         while(!estadoPartida(aliados.getGrupo()) && !estadoPartida(enemigo.getGrupo())){ 
             System.out.println("\n");       
             for(int i=0;i<enemigo.getGrupo().size();i++){
-                System.out.println("Enemigo: "+(i+1)+"-"+enemigo.getGrupo().get(i).getNombre()+", Vida: "+((Grupo)enemigo).getGrupo().get(i).getVida());
+                System.out.println("Enemigo: "+(i+1)+"-"+(enemigo.getGrupo().get(i)).getNombre()+", Vida: "+((Enemigo)enemigo.getGrupo().get(i)).getVida());
             }
             System.out.println("\n");       
             for(int i=0;i<aliados.getGrupo().size();i++){
-                System.out.println("Aliado: "+aliados.getGrupo().get(i).getNombre()+", Vida: "+aliados.getGrupo().get(i).getVida()+", Estamina: "+aliados.getGrupo().get(i).getEstamina()+", Mana: "+((Jugador)aliados.getGrupo().get(i)).getMana());
+                System.out.println("Aliado: "+aliados.getGrupo().get(i).getNombre()+", Vida: "+((Jugador)aliados.getGrupo().get(i)).getVida()+", Estamina: "+((Jugador)aliados.getGrupo().get(i)).getEstamina()+", Mana: "+((Jugador)aliados.getGrupo().get(i)).getMana());
             }
         turnoAliado(enemigo.getGrupo());
         turnoEnemigo(enemigo);
@@ -87,7 +87,6 @@ public class Juego {
                 boolean critico = false;
                 int objetivo = 0;
                 while(turnoJugador){
-                    int esCritico=critico(aliado);
                     int accion = 0;
                     if(((Jugador)aliado).getVida()<0){
                         break;
@@ -103,25 +102,28 @@ public class Juego {
                         }
                             switch (accion) {
                                 case 1:
-                                    while(turnoJugador){
-                                        atacar(enemigo, esCritico, aliado, accion);
+                                        if(atacar(enemigo, aliado, accion)){
                                         turnoJugador=false;
                                         break;
+                                        
                                         }
                                         break;
                                 case 2:
                                     if(((Jugador)aliado).getHechizo().esOfensivo()){
-                                        while(turnoJugador){
-                                            atacar(enemigo, esCritico, aliado, accion);
+                                        if(turnoJugador){
+                                            if(atacar(enemigo, aliado, accion)){
                                             turnoJugador=false;
                                             break;
                                             }
+                                            }
                                             break;
                                     }else{
-                                        while(turnoJugador){
-                                            curacion(aliado,objetivo);
+                                        if(turnoJugador){
+                                            if(curacion(aliado,objetivo)){
                                             turnoJugador=false;
                                             break;
+                                            }
+                                            
                                         }
                                         break;
                                     }
@@ -168,42 +170,52 @@ public class Juego {
             return true;
         }
     }
-    public void atacar(ArrayList<Grupo>enemigo, int esCritico, Grupo aliado, int accion){
+    public boolean atacar(ArrayList<Grupo>enemigo, Grupo aliado, int accion){
         int objetivo;
         boolean ataque=false;
         boolean critico=false;
-        while(!ataque){
+        int esCritico=critico(aliado);
             try{
                 System.out.println("A enemigo desea atacar?");
                 objetivo=new Integer(entrada.readLine())-1;
             if(objetivo>enemigo.size()-1){
                 System.out.println("Elija un enemigo presente");
-            }else if(enemigo.get(objetivo).getVida()<0){
+            }else if(((Enemigo)enemigo.get(objetivo)).getVida()<0){
                 System.out.println("Elija un objetivo vivo");
             }else{
-                if(critico(aliado)>0){
+                if(esCritico>0){
                     System.out.println("CRITICO!");
                     critico=true;
                 }
-                if(critico(aliado)<0){
+                if(esCritico<0){
                     System.out.println("Fallo Critico!");
-                    break;
+                    return true;
                 }
                 if(accion==1){
+                    if(((Jugador)aliado).getEstamina()<((Jugador)aliado).getArma().getCoste()){
+                        System.out.println("Estamina insuficiente!");
+                    }
                     ((Jugador)aliado).atacar(enemigo.get(objetivo),critico);
                     ataque=true;
                 }else{
+                    if(((Jugador)aliado).getMana()<((Jugador)aliado).getHechizo().getCoste()){
+                        System.out.println("Mana insuficiente!");
+                    }
                     ((Jugador)aliado).utilizarMagia(enemigo.get(objetivo),critico);
                     ataque=true;
                 }
-                if(enemigo.get(objetivo).getVida()<0){
+                if(((Enemigo)enemigo.get(objetivo)).getVida()<0){
                     System.out.println(enemigo.get(objetivo).getNombre()+" ha muerto");
                 }
             }
         }catch(Exception e){
             System.out.println(e);
         }
-        }
+    
+    if(ataque){
+        return true;
+    }
+    return false;
     }
     public void turnoEnemigo(Grupo enemigo){
         int objetivo = 0;
@@ -215,7 +227,7 @@ public class Juego {
                 boolean critico=false;
                 boolean atacado=false;
                 int esCritico=critico(e);
-                if(e.getVida()>0){
+                if(((Enemigo)e).getVida()>0){
                     while(!atacado){
                         if(esCritico>0){
                             System.out.println("CRITICO DE "+((Enemigo)e).getNombre()+"!");
@@ -226,12 +238,12 @@ public class Juego {
                             break;
                         }
                         objetivo=r.nextInt(aliados.getGrupo().size());
-                        if(aliados.getGrupo().get(objetivo).getVida()>0){
+                        if(((Jugador)aliados.getGrupo().get(objetivo)).getVida()>0){
                         ((Enemigo)e).atacar((aliados.getGrupo().get(objetivo)), critico);
                         atacado=true;
                         } 
                     }
-                    if(aliados.getGrupo().get(objetivo).getVida()<0){
+                    if(((Jugador)aliados.getGrupo().get(objetivo)).getVida()<0){
                         System.out.println(aliados.getGrupo().get(objetivo).getNombre()+" ha muerto!");
                     }
                 
@@ -243,33 +255,39 @@ public class Juego {
             } 
         }
     }
-    public void curacion(Grupo aliado,int objetivo){
+    public boolean curacion(Grupo aliado,int objetivo){
         boolean curado=false;
         boolean critico=true;
-        while(!curado){
+        int esCritico=critico(aliado);
             try{
                 System.out.println("A que aliado desea curar?");
                 objetivo=new Integer(entrada.readLine())-1;
             if(objetivo>aliados.getGrupo().size()-1){
                 System.out.println("Elija un aliado presente");
-            }else if(aliados.getGrupo().get(objetivo).getVida()<0){
+            }else if(((Jugador)aliados.getGrupo().get(objetivo)).getVida()<0){
                 System.out.println("El aliado esta muerto, elija a otro aliado para curar");
+            }else if(((Jugador)aliado).getMana()<((Jugador)aliado).getHechizo().getCoste()){
+                System.out.println("Mana insuficiente!");
             }else{
-                if(critico(aliado)>0){
+                if(esCritico>0){
                     System.out.println("CRITICO!");
                     critico=true;
                 }
-                if(critico(aliado)<0){
+                if(esCritico<0){
                     System.out.println("Fallo Critico!");
-                    break;
+                    return true;
                 }
                 ((Jugador)aliado).utilizarMagia(aliados.getGrupo().get(objetivo),critico);
                 curado=true;
             }
-            }catch(Exception exc){
+        }catch(Exception exc){
             System.out.println(exc);
-            }
         }
+        
+        if(curado)
+        return true;
+        
+        return false;
     }
     public int critico(Grupo personaje){
         int tirarDado=dado.tirarDado(((Personaje)personaje).getCritico());

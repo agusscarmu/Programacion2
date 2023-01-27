@@ -1,6 +1,7 @@
 package JuegoDeRol.Pociones;
 
 import JuegoDeRol.Personaje;
+import JuegoDeRol.Grupos.Aliados.Jugador;
 
 public class PocionDeVida extends Pocion{
 
@@ -11,7 +12,7 @@ public class PocionDeVida extends Pocion{
 
     @Override
     public void usar(Personaje personaje) {
-        personaje.curacion(getPoder());
+        ((Jugador)personaje).curacion(getPoder());
         uso();
     }
     @Override

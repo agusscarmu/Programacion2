@@ -3,6 +3,7 @@ package JuegoDeRol.Armas;
 import java.util.Random;
 
 import JuegoDeRol.Grupos.Grupo;
+import JuegoDeRol.Grupos.Enemigos.Enemigo;
 
 public class Arco extends Arma{
     private int headshot;
@@ -18,7 +19,7 @@ public class Arco extends Arma{
 
 
     @Override
-    public Grupo atacar(Grupo enemigo, boolean critico, int fuerza) {
+    public Grupo atacar(Enemigo enemigo, boolean critico, int fuerza) {
         Random r = new Random();
         headshot=r.nextInt(100);
         if(critico){

@@ -1,6 +1,7 @@
 package JuegoDeRol.Habilidades.HabilidadesAliados;
 
 import JuegoDeRol.Grupos.Grupo;
+import JuegoDeRol.Grupos.Aliados.Jugador;
 import JuegoDeRol.Habilidades.HabilidadDefensiva;
 
 public class HechizoCurativo extends HabilidadDefensiva {
@@ -13,9 +14,9 @@ public class HechizoCurativo extends HabilidadDefensiva {
     @Override
     public Grupo ejecutar(Grupo personaje, boolean critico, int vida) {
         if(critico)
-            personaje.curacion(getPoder()*2+vida);
+            ((Jugador)personaje).curacion(getPoder()*2+vida);
         else
-            personaje.curacion(getPoder()+vida);
+            ((Jugador)personaje).curacion(getPoder()+vida);
 
         return personaje;
     }

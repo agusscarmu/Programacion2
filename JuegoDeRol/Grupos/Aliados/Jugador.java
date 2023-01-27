@@ -1,22 +1,38 @@
 package JuegoDeRol.Grupos.Aliados;
 
-import java.util.ArrayList;
-
 import JuegoDeRol.ElementosUtilizables;
 import JuegoDeRol.Armas.Arma;
 import JuegoDeRol.Grupos.Grupo;
+import JuegoDeRol.Grupos.Enemigos.Enemigo;
 import JuegoDeRol.Habilidades.Habilidad;
 import JuegoDeRol.Pociones.Pocion;
 
-public class Jugador extends Grupo{
+public class Jugador extends EquipoAliado{
 
     private Arma arma;
     private Habilidad hechizo;
     private int critico;
     private Pocion pocion;
+    private int vida;
+    private int fuerza;
+    private int estamina;
+    private int defensa;
+    private int mana;
+    private int ininciativa;
+    private int vidaMaxima;
+    private int manaMaximo;
 
-    public Jugador(String nombre, int vida, int defensa, int mana, int estamina, int fuerza, Arma arma, Habilidad hechizo, Pocion pocion,int critico) {
-        super(nombre, vida, defensa, mana,fuerza, estamina,critico);
+    public Jugador(String nombre, int vida, int defensa, int mana, int estamina, int fuerza, Arma arma, Habilidad hechizo, Pocion pocion,int critico, int ininciativa) {
+        super(nombre);
+        this.vida=vida;
+        this.defensa=defensa;
+        this.mana=mana;
+        this.fuerza=fuerza;
+        this.estamina=estamina;
+        this.critico=critico;
+        this.ininciativa=ininciativa;
+        this.vidaMaxima=vida;
+        this.manaMaximo=mana;
         this.arma=arma;
         this.pocion=pocion;
         this.hechizo=hechizo;
@@ -37,11 +53,10 @@ public class Jugador extends Grupo{
     public void usarPocion(){
         pocion.usar(this);
     }
-    @Override
     public Grupo atacar(Grupo personaje, boolean critico) {
         if(getEstamina()>arma.getCoste()){
             System.out.println("Ataco con: "+arma.getNombre());
-            arma.atacar(personaje, critico, (getFuerza()/2));
+            arma.atacar((Enemigo)personaje, critico, (getFuerza()/2));
             cansancio(arma.getCoste());
             return personaje;
         }else
@@ -51,10 +66,11 @@ public class Jugador extends Grupo{
     public Grupo utilizarMagia(Grupo personaje, boolean critico){
         if(getMana()>hechizo.getCoste()){
         System.out.println("Lanzo: "+hechizo.getNombre());
-        if(hechizo.autoCurativo())
+        if(hechizo.autoCurativo()){
         hechizo.ejecutar(personaje,critico, (getVidaMaxima()/2), this);
-
+        }else{   
         hechizo.ejecutar(personaje,critico, (getManaMaximo()/3));
+        }
         gastoMana(hechizo.getCoste());
         return personaje;
         }else
@@ -79,17 +95,59 @@ public class Jugador extends Grupo{
         return getVida();
     }
     @Override
-    public ArrayList<Grupo> getGrupo() {
-        return null;
-    }
-    @Override
     public void setRecuperacion(int recuperacion) {
         recuperacion(recuperacion);
     }
-    @Override
-    public void agregarIntegrante(Grupo enemigo) {
-        // TODO Auto-generated method stub
-        
+    public int getVida(){
+        return vida;
+    }
+    public int getIninciativa(){
+        return ininciativa;
+    }
+    public int getMana(){
+        return mana;
+    }
+    public int getManaMaximo(){
+        return manaMaximo;
+    }
+    public void gastoMana(int gasto){
+        mana= mana - gasto;
+    }
+    public int getVidaMaxima(){
+        return vidaMaxima;
+    }
+    public int getEstamina(){
+        return estamina;
+    }
+    public int getFuerza(){
+        return fuerza;
+    }
+    public void recuperarMana(int manaRecuperado){
+        mana+=manaRecuperado;
+    }
+    public void recuperacion(int recuperacion){
+        estamina+=recuperacion;
+    }
+    public void cansancio(int debuff){
+        estamina-=debuff;
+    }
+    public void impacto(int golpe){
+        vida = vida - (golpe-(golpe*defensa/100));
+        System.out.println("Danio realizado: "+ (golpe-(golpe*defensa/100)));
+    }
+    public void impacto(int golpe, int defensaRota){
+        int defensaRobada = 100-defensaRota;
+        vida = vida - (golpe+(golpe*(defensa*defensaRobada/100)/100));
+        System.out.println("Danio realizado: "+ (golpe+(golpe*(defensa*defensaRobada/100)/100)));
+    }
+    public void curacion(int cura){
+        vida+=cura;
+        if(vida>vidaMaxima){
+            vida=vidaMaxima;
+        }
+    }
+    public void buffFuerza(int buff){
+        fuerza+=buff;
     }
 
 }

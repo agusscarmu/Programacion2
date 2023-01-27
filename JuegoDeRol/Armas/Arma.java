@@ -2,6 +2,7 @@ package JuegoDeRol.Armas;
 
 import JuegoDeRol.ElementosUtilizables;
 import JuegoDeRol.Grupos.Grupo;
+import JuegoDeRol.Grupos.Enemigos.Enemigo;
 
 public abstract class Arma extends ElementosUtilizables{
     protected int critico; 
@@ -18,5 +19,5 @@ public abstract class Arma extends ElementosUtilizables{
     public String toString() {
         return "Arma: "+getNombre()+", Danio: "+getPoder()+", Coste: "+getCoste()+", Pasiva: "+pasiva;
     }
-    public abstract Grupo atacar(Grupo grupo, boolean critico, int fuerza);
+    public abstract Grupo atacar(Enemigo grupo, boolean critico, int fuerza);
 }
