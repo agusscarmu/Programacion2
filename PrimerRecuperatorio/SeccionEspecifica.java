@@ -1,12 +1,13 @@
 package PrimerRecuperatorio;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 
 public class SeccionEspecifica extends Seccion {
 
     private ArrayList<String> categoriasAdmisibles;
-    public SeccionEspecifica(String categoria) {
-        super(categoria);
+    public SeccionEspecifica(String categoria,Comparator<PortalNoticia> Ordenanza) {
+        super(categoria, Ordenanza);
         categoriasAdmisibles=new ArrayList<>();
     }
     

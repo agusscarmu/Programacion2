@@ -14,6 +14,5 @@ public abstract class PortalNoticia {
         return categoria;
     }
     public abstract String getPalabrasClave();
-    public abstract void ordenarPorCategoria();
     public abstract ArrayList<PortalNoticia> filtrarPorCondicion(Condicion condicion);
 }

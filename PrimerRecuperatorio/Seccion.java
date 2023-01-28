@@ -2,23 +2,32 @@ package PrimerRecuperatorio;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
+
+import javax.sound.sampled.Port;
 
 import PrimerRecuperatorio.Condiciones.Condicion;
 
 public class Seccion extends PortalNoticia{
     protected ArrayList<PortalNoticia> elementos;
-    XCategoria porCategoria;
+    private static Comparator<PortalNoticia> Ordenanza;
 
-    public Seccion(String categoria) {
+    public void setOrdenanza(Comparator<PortalNoticia> c){
+        this.Ordenanza = c;
+    }
+
+    public Seccion(String categoria, Comparator<PortalNoticia> Ordenanza) {
         super(categoria);
-        elementos=new ArrayList<>();
-        porCategoria=new XCategoria();
+        this.elementos=new ArrayList<>();
+        this.Ordenanza= Ordenanza;
     }
     public void agregarElemento(PortalNoticia elemento){
         elementos.add(elemento);
+        this.ordenar();
     }
     public ArrayList<PortalNoticia> getElementos(){
-        return elementos;
+        ArrayList<PortalNoticia>elementosCopia = new ArrayList<>(elementos);
+        return elementosCopia;
     }
 
     @Override
@@ -31,11 +40,8 @@ public class Seccion extends PortalNoticia{
        return palabrasClave;
     }
 
-    public void ordenarPorCategoria() {
-        for(PortalNoticia e:elementos){
-            e.ordenarPorCategoria();
-        }
-        Collections.sort(elementos, porCategoria);
+    protected void ordenar() {
+        Collections.sort(elementos, Ordenanza);
     }
 
     @Override

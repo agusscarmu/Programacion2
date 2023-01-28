@@ -1,5 +1,7 @@
 package PrimerRecuperatorio;
 
+import java.util.Comparator;
+
 import PrimerRecuperatorio.Condiciones.Condicion;
 import PrimerRecuperatorio.Condiciones.CondicionAnd;
 import PrimerRecuperatorio.Condiciones.CondicionXAutor;
@@ -23,13 +25,14 @@ public class Principal {
         Noticia noticia9 = new Noticia("Agustin quiere revancha con su padre", "El pibe es re porfiado", "Futbol", "Padel", "Padel");
         Noticia noticiaPrivada = new NoticiaPrivada("Peligro con cura del covid", "Nuevas curas fallan", "Charles F.", "Medicina", "Cura Covid Salud Peligro");
 
-        Seccion seccion = new Seccion("PortalPrincipal");
-        Seccion seccion1 = new Seccion("Policial");
-        Seccion seccion2 = new Seccion("Literatura");
-        Seccion seccion3 = new Seccion("Politica");
-        Seccion seccion4 = new Seccion("Medicina");
-        Seccion seccionPolicial = new SeccionEspecifica("Policial");
-        Seccion seccionDeportes = new SeccionEspecifica("Deporte");
+        Comparator<PortalNoticia> porCategoria = new XCategoria();
+        Seccion seccion = new Seccion("PortalPrincipal", porCategoria);
+        Seccion seccion1 = new Seccion("Policial", porCategoria);
+        Seccion seccion2 = new Seccion("Literatura", porCategoria);
+        Seccion seccion3 = new Seccion("Politica", porCategoria);
+        Seccion seccion4 = new Seccion("Medicina", porCategoria);
+        Seccion seccionPolicial = new SeccionEspecifica("Policial",porCategoria);
+        Seccion seccionDeportes = new SeccionEspecifica("Deporte",porCategoria);
         
         Condicion cXt = new CondicionXTitulo("libro");
         Condicion cXc = new CondicionXCategoria("Medicina");
@@ -80,7 +83,6 @@ public class Principal {
         seccionPolicial.agregarElemento(noticia1);
         seccionPolicial.agregarElemento(noticia3);
 
-        seccion.ordenarPorCategoria();
         
         System.out.println(seccionDeportes);
         // noticiero.verSuscriptores();

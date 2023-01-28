@@ -10,7 +10,6 @@ public class Noticia extends PortalNoticia{
     private String contenido;
     private String titulo;
     private String autor;
-    private String categoria;
     private String palabrasClave;
 
     public Noticia(String contenido, String titulo, String autor, String categoria, String palabrasClave){
@@ -46,8 +45,4 @@ public class Noticia extends PortalNoticia{
         }
         return e;
     }
-    @Override
-    public void ordenarPorCategoria() {
-    }
-
 }
