@@ -12,10 +12,10 @@ public class Seccion extends PortalNoticia{
     protected ArrayList<PortalNoticia> elementos;
     private static Comparator<PortalNoticia> Ordenanza;
 
+    
     public void setOrdenanza(Comparator<PortalNoticia> c){
         this.Ordenanza = c;
     }
-
     public Seccion(String categoria, Comparator<PortalNoticia> Ordenanza) {
         super(categoria);
         this.elementos=new ArrayList<>();
