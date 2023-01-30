@@ -146,7 +146,7 @@ public class Menu {
         
         mazmorras.ordenar();
         grupoAliado.ordenar();
-
+        
         juego.jugar();
         
         

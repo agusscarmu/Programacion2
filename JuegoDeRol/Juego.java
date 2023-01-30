@@ -38,7 +38,7 @@ public class Juego {
         int nroMazmorra=1;
         for(Grupo mazmorra: enemigos.getGrupo()){
             int sala=1;
-            System.out.println("\nMazmorra: "+nroMazmorra+": "+mazmorra.getNombre());
+            System.out.println("\nMazmorra "+nroMazmorra+": "+mazmorra.getNombre());
             for(Grupo enemigo: mazmorra.getGrupo()){
             System.out.println("\nSala: "+sala);
         while(!estadoPartida(aliados.getGrupo()) && !estadoPartida(enemigo.getGrupo())){ 
@@ -67,10 +67,11 @@ public class Juego {
         }
         sala++;
         }
+        nroMazmorra++;
     }
     nroMazmorra++;
     }
-
+    
     public void turnoAliado(ArrayList<Grupo> enemigo){
         for(Grupo aliado: aliados.getGrupo()){
             if(estadoPartida(enemigo)){
@@ -96,10 +97,6 @@ public class Juego {
                         System.out.println("1 Para atacar con: "+((Jugador)aliado).getArma().getNombre()+"\n2 Para tirar hechizo: "+((Jugador)aliado).getHechizo().getNombre()
                             +"\n3 Para usar: "+((Jugador)aliado).getPocion().getNombre()+"\n4 Para cambiar de arma\n5 Para cambiar de hechizo\n6 Para cambiar de pocion");
                         accion = new Integer(entrada.readLine());
-                        if(accion>NroDeAcciones){
-                            accion=0;
-                            System.out.println("Ingresa un valor entre las opciones disponibles.");
-                        }
                             switch (accion) {
                                 case 1:
                                         if(atacar(enemigo, aliado, accion)){
@@ -151,6 +148,11 @@ public class Juego {
                                     equipar(aliado,pociones,accion);
                                     accion=0;
                                     break;
+                                default: 
+                                    System.out.println("Ingresa un valor entre las opciones disponibles.");
+                                    accion=0;
+                                    break;
+
                             }
                         }
                     }
