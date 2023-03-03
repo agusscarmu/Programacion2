@@ -9,14 +9,14 @@ import FinalProg.Condiciones.Cond;
 public class Album extends Carpeta{
 
     protected ArrayList<Carpeta>elementos;
-    private OrdenanzaPorFechaYPeso ordenanza;
+    private Ordenanza ordenanza;
     public Album(String titulo, Date fecha) {
         super(titulo, fecha);
         elementos=new ArrayList<>();
-        ordenanza=new OrdenanzaPorFechaYPeso();
+        ordenanza=new Ordenanza();
     }
     
-    public void setMetodoOrdenamiento(OrdenanzaPorFechaYPeso orden){
+    public void setMetodoOrdenamiento(Ordenanza orden){
         ordenanza=orden;
     }
 
