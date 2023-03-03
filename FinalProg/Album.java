@@ -15,10 +15,6 @@ public class Album extends Carpeta{
         elementos=new ArrayList<>();
         ordenanza=new Ordenanza();
     }
-    
-    public void setMetodoOrdenamiento(Ordenanza orden){
-        ordenanza=orden;
-    }
 
     public void addElemento(Carpeta elemento){
         elementos.add(elemento);
