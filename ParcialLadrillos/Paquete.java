@@ -2,6 +2,7 @@ package ParcialLadrillos;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 
 import ParcialLadrillos.Condiciones.C;
 
@@ -9,14 +10,14 @@ public class Paquete extends ElementosLadrillos{
 
     private ArrayList<ElementosLadrillos>elementos;
     private int descuentoCosto;
-    private Orden orden;
+    private Comparator<ElementosLadrillos> orden;
     public Paquete(String marca, int descuentoCosto) {
         super(marca);
         this.descuentoCosto=descuentoCosto;
         this.elementos=new ArrayList<>();
     }
 
-    public void setOrden(Orden o){
+    public void setOrden(Comparator<ElementosLadrillos> o){
         orden=o;
     }
 
