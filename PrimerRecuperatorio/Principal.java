@@ -83,7 +83,6 @@ public class Principal {
         seccionPolicial.agregarElemento(noticia1);
         seccionPolicial.agregarElemento(noticia3);
 
-        
         System.out.println(seccionDeportes);
         // noticiero.verSuscriptores();
         // System.out.println(seccion4);
